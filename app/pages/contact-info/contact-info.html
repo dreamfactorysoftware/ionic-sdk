@@ -1,0 +1,55 @@
+
+<ion-header>
+  <ion-navbar>
+    <button menuToggle *ngIf="!selectedItem">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title *ngIf="!contactInfo.id">New contact Info</ion-title>
+    <ion-title *ngIf="contactInfo.id">Edit</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="getting-started">
+    <ion-list inset>
+        <form [ngFormModel]="form" (ngSubmit)="save()">
+            <ion-item>
+                <ion-label floating>Info Type</ion-label>
+                <ion-select ngControl="infoType" [(ngModel)]="contactInfo.infoType">
+                    <ion-option *ngFor="let item of infoTypes" [value]="item">{{ item }}</ion-option>
+                </ion-select>
+            </ion-item>
+            <ion-item>
+                <ion-label floating>Phone</ion-label>
+                <ion-input type="text" ngControl="phone" [(ngModel)]="contactInfo.phone"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label floating>Email</ion-label>
+                <ion-input type="text" ngControl="email" [(ngModel)]="contactInfo.email"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label floating>Address</ion-label>
+                <ion-input type="text" ngControl="address" [(ngModel)]="contactInfo.address"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label floating>City</ion-label>
+                <ion-input ngControl="city" [(ngModel)]="contactInfo.city"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label floating>State</ion-label>
+                <ion-input ngControl="state" [(ngModel)]="contactInfo.state"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label floating>ZIP</ion-label>
+                <ion-input ngControl="zip" [(ngModel)]="contactInfo.zip"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label floating>Country</ion-label>
+                <ion-input ngControl="country" [(ngModel)]="contactInfo.country"></ion-input>
+            </ion-item>
+            <button block>
+                <ion-icon name="add"></ion-icon>Save
+                <ion-icon name="back" (ngClick)="back()"></ion-icon>Back
+            </button>
+        </form>
+    </ion-list>
+</ion-content>

@@ -1,0 +1,18 @@
+
+<ion-header>
+  <ion-navbar>
+    <button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Contact List</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <button ion-item *ngFor="let contact of contacts" (click)="show($event, contact.id)">
+      <ion-icon name="{{contact.imageUrl || shadowImage}}" item-left></ion-icon>
+      {{ contact.firstName + ' ' + contact.lastName }}
+    </button>
+  </ion-list>
+</ion-content>

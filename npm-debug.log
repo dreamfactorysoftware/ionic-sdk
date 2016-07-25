@@ -1,0 +1,59 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'install' ]
+2 info using npm@3.10.5
+3 info using node@v4.4.0
+4 silly loadCurrentTree Starting
+5 silly install loadCurrentTree
+6 silly install readLocalPackageData
+7 silly install normalizeTree
+8 silly loadCurrentTree Finishing
+9 silly loadIdealTree Starting
+10 silly install loadIdealTree
+11 silly cloneCurrentTree Starting
+12 silly install cloneCurrentTreeToIdealTree
+13 silly cloneCurrentTree Finishing
+14 silly loadShrinkwrap Starting
+15 silly install loadShrinkwrap
+16 silly loadShrinkwrap Finishing
+17 silly loadAllDepsIntoIdealTree Starting
+18 silly install loadAllDepsIntoIdealTree
+19 silly fetchOtherPackageData @angular@2.0.0-beta.1
+20 silly cache add args [ '@angular@2.0.0-beta.1', null ]
+21 verbose cache add spec @angular@2.0.0-beta.1
+22 silly cache add parsed spec Result {
+22 silly cache add   raw: '@angular@2.0.0-beta.1',
+22 silly cache add   scope: null,
+22 silly cache add   escapedName: null,
+22 silly cache add   name: null,
+22 silly cache add   rawSpec: '@angular@2.0.0-beta.1',
+22 silly cache add   spec: '/Users/neo/projects/ionic-pr/MyIonic2Project/@angular@2.0.0-beta.1',
+22 silly cache add   type: 'local' }
+23 error addLocal Could not install /Users/neo/projects/ionic-pr/MyIonic2Project/@angular@2.0.0-beta.1
+24 silly fetchPackageMetaData Error: ENOENT: no such file or directory, open '/Users/neo/projects/ionic-pr/MyIonic2Project/@angular@2.0.0-beta.1'
+24 silly fetchPackageMetaData     at Error (native)
+24 silly fetchPackageMetaData  error for @angular@2.0.0-beta.1 { [Error: ENOENT: no such file or directory, open '/Users/neo/projects/ionic-pr/MyIonic2Project/@angular@2.0.0-beta.1']
+24 silly fetchPackageMetaData   errno: -2,
+24 silly fetchPackageMetaData   code: 'ENOENT',
+24 silly fetchPackageMetaData   syscall: 'open',
+24 silly fetchPackageMetaData   path: '/Users/neo/projects/ionic-pr/MyIonic2Project/@angular@2.0.0-beta.1' }
+25 silly rollbackFailedOptional Starting
+26 silly rollbackFailedOptional Finishing
+27 silly runTopLevelLifecycles Starting
+28 silly runTopLevelLifecycles Finishing
+29 silly install printInstalled
+30 verbose stack Error: ENOENT: no such file or directory, open '/Users/neo/projects/ionic-pr/MyIonic2Project/@angular@2.0.0-beta.1'
+30 verbose stack     at Error (native)
+31 verbose cwd /Users/neo/projects/ionic-pr/MyIonic2Project
+32 error Darwin 15.3.0
+33 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "install"
+34 error node v4.4.0
+35 error npm  v3.10.5
+36 error path /Users/neo/projects/ionic-pr/MyIonic2Project/@angular@2.0.0-beta.1
+37 error code ENOENT
+38 error errno -2
+39 error syscall open
+40 error enoent ENOENT: no such file or directory, open '/Users/neo/projects/ionic-pr/MyIonic2Project/@angular@2.0.0-beta.1'
+41 error enoent ENOENT: no such file or directory, open '/Users/neo/projects/ionic-pr/MyIonic2Project/@angular@2.0.0-beta.1'
+41 error enoent This is most likely not a problem with npm itself
+41 error enoent and is related to npm not being able to find a file.
+42 verbose exit [ -2, true ]
