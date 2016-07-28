@@ -48,13 +48,12 @@ export class GroupCmp {
 
 			groupService
 				.get(groupId)
-				.subscribe((group) => {console.log('group',group);self.group = group});
+				.subscribe((group) => self.group = group);
 
 			contactGroupService
 				.query(contactGroupParams, true)
 				.subscribe((contactGroups) => {
 					self.contactGroups = contactGroups;
-					console.log('contactGroups', contactGroups)
 					self.getRemainingContacts();
 				});
 		}
@@ -83,7 +82,6 @@ export class GroupCmp {
 
 	addSelectedContact() {
 		if (!this.selectedContactId) return;
-
 		var self = this;
 		var contact = this.remainingContacts.filter((item) => {
 			return item.id == self.selectedContactId;

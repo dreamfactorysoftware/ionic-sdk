@@ -6,7 +6,6 @@ export class DfRequestOptions extends BaseRequestOptions {
 
 	constructor () {
 		super();
-    console.log('somehow here')
 		this.headers.set('X-Dreamfactory-API-Key' ,constants.DSP_API_KEY);
 
 		var token = localStorage.getItem('session_token');

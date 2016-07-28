@@ -1,8 +1,6 @@
 import {provide, Component, ViewChild} from '@angular/core';
 import {ionicBootstrap, Platform, MenuController, Nav} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
-import {HelloIonicPage} from './pages/hello-ionic/hello-ionic';
-// import {ListPage} from './pages/list/list';
 import {GroupListCmp} from './pages/group/group-list';
 import {ContactListCmp} from './pages/contact-list/contact-list';
 import {HTTP_PROVIDERS, Http, RequestOptions} from '@angular/http';
@@ -42,7 +40,7 @@ class MyApp {
     // close the menu when clicking a link from the menu
     this.menu.close();
     // navigate to the new page if it is not the current page
-    this.nav.setRoot(page.component);
+    this.nav.push(page.component);
   }
 }
 
