@@ -1,26 +1,29 @@
-import {Injectable} from '@angular/core';
-//import {BrowserDomAdapter} from '@angular/platform-browser'
+import { Injectable, Inject } from '@angular/core';
+import { DOCUMENT } from '@angular/platform-browser';
 import 'rxjs/add/operator/map';
-import {Observable} from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
+import { Alert, NavController } from 'ionic-angular';
 
 
 @Injectable()
 export class NotificationService {
-	constructor(/*private _dom: BrowserDomAdapter*/) {
+    constructor(@Inject(DOCUMENT) private document, public nav: NavController) {}
 
-	};
-
-	show (type, content) {
-
-		/*var notification = this._dom.createElement('div');
-		notification.innerHTML = content;
-		notification.classList.add('df-notification', type);
-
-
-		var notificationEl = this._dom.query('body').appendChild(notification);
-
-		setTimeout(function(argument) {
-			notificationEl.remove();
-		}, 4000)*/
-	}
+    show(type, content) {
+        let alert = Alert.create({
+            title: type,
+            subTitle: content,
+            buttons: [{
+                text: 'Ok',
+                handler: () => {                    
+                    let navTransition = alert.dismiss();
+                    navTransition.then(() => {
+                        this.nav.pop();
+                    });
+                    return false;
+                }
+            }]
+        });
+        this.nav.present(alert);
+    }
 }

@@ -1,0 +1,11 @@
+.grid-basic-page {
+
+  ion-col {
+    background-color: #F9FAFB;
+    padding: 3px;
+    border-bottom: 1px solid #ddd;
+    border-radius: 2px;
+    text-align: center;
+  }
+
+}

@@ -3,6 +3,7 @@ An address book app for Ionic showing user registration, user login, and CRUD.
 
 - clone the repo
 - cd ionic-sdk
+- npm install
 - npm install -g ionic@beta (reference: http://ionicframework.com/docs/v2/getting-started/installation/)
 - npm install -g cordova
 - npm install

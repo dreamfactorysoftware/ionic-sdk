@@ -1,17 +1,15 @@
-
 <ion-header>
-  <ion-navbar>
-    <button menuToggle *ngIf="!selectedItem">
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title *ngIf="!contactInfo.id">New contact Info</ion-title>
-    <ion-title *ngIf="contactInfo.id">Edit</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <button menuToggle *ngIf="!selectedItem">
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title *ngIf="!contactInfo.id">New contact Info</ion-title>
+        <ion-title *ngIf="contactInfo.id">Edit</ion-title>
+    </ion-navbar>
 </ion-header>
-
 <ion-content padding>
     <ion-list inset>
-        <form [ngFormModel]="form" (ngSubmit)="save()">
+        <form [ngFormModel]="form">
             <ion-item>
                 <ion-label floating>Info Type</ion-label>
                 <ion-select ngControl="infoType" [(ngModel)]="contactInfo.infoType">
@@ -47,9 +45,11 @@
                 <ion-input ngControl="country" [(ngModel)]="contactInfo.country"></ion-input>
             </ion-item>
             <button block>
-                <ion-icon name="add"></ion-icon>Save
-                <ion-icon name="back" (ngClick)="back()"></ion-icon>Back
+                <button (click)="add($event)">Add</button>
+                <button (click)="save()">Save</button>
+                <button (click)="back()">Back</button>
             </button>
         </form>
     </ion-list>
+    
 </ion-content>

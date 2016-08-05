@@ -1,0 +1,90 @@
+<ion-header>
+    <ion-navbar>
+        <button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title *ngIf="!contact.id">Detail - New contact</ion-title>
+        <ion-title *ngIf="contact.id">Detail - {{ contact.firstName }} {{ contact.lastName }}</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <ion-grid>
+        <ion-row>
+            <ion-col>
+                <form [ngFormModel]="contactForm">
+                    <ion-item>
+                        <ion-label floating>First name</ion-label>
+                        <ion-input type="text" ngControl="firstName" [(ngModel)]="contact.firstName"></ion-input>
+                        <div *ngIf="firstName.hasError('required') " class="error-box">* First name is required</div>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label floating>Last name</ion-label>
+                        <ion-input type="text" ngControl="lastName" [(ngModel)]="contact.lastName"></ion-input>
+                        <div *ngIf="lastName.hasError('required') && lastName.touched" class="error-box">* Last name is required</div>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label floating>Image URL</ion-label>
+                        <ion-input type="text" ngControl="imageUrl" [(ngModel)]="contact.imageUrl"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label floating>Skype</ion-label>
+                        <ion-input type="text" ngControl="skype" [(ngModel)]="contact.skype"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label floating>Twitter</ion-label>
+                        <ion-input ngControl="twitter" [(ngModel)]="contact.twitter"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label floating>Notes</ion-label>
+                        <ion-input type="text" ngControl="notes" [(ngModel)]="contact.notes"></ion-input>
+                    </ion-item>
+                    <ion-nav-bar class="bar-dark">
+                        <ion-nav-buttons side="secondary">
+                            <button (click)="save()" side="left">
+                                <ion-icon ios="ios-create" md="md-create"></ion-icon>Save
+                            </button>
+                            <button (click)="back()" side="right">
+                                <ion-icon ios="ios-arrow-back" md="md-arrow-back" name="back"></ion-icon>Back
+                            </button>
+                            <button name="add" (click)="createContact($event)">
+                                <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon>Add
+                            </button>
+                        </ion-nav-buttons>
+                    </ion-nav-bar>
+                </form>
+            </ion-col>
+        </ion-row>
+        <ion-row *ngIf="contact.id" center>
+            <ion-label>Groups</ion-label>
+        </ion-row>
+        <ion-row *ngIf="contact.id">
+            <ion-col>
+                <ion-item>
+                    <ion-select [(ngModel)]="selectedGroupId" placeholder="Select group">
+                        <ion-option *ngFor="let group of remainingGroups" [value]="group.id">{{ group.name }}</ion-option>
+                    </ion-select>
+                </ion-item>
+            </ion-col>
+            <ion-col>
+                <button name="add" class="button button-small button-light" (click)="addSelectedGroup()" (disabled)="!selectedGroupId" end>
+                    <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon>
+                </button>
+            </ion-col>
+        </ion-row>
+        <ion-row *ngFor="let contactGroup of contactGroups">
+            <ion-col>{{ contactGroup.group.name }}</ion-col>
+            <ion-col>
+                <button name="trash" class="button button-small button-light" (click)="removeGroup(contactGroup)" end>
+                    <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
+                </button>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <ion-list inset *ngIf="contact.id">
+                    <contact-info-list></contact-info-list>
+                </ion-list>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

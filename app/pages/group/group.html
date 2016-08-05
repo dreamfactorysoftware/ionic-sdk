@@ -1,54 +1,67 @@
-
 <ion-header>
-  <ion-navbar>
-    <button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title *ngIf="!group.id">New group</ion-title>
-    <ion-title *ngIf="group.id">{{ group.name }}</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title *ngIf="!group.id">New group</ion-title>
+        <ion-title *ngIf="group.id">{{ group.name }}</ion-title>
+    </ion-navbar>
 </ion-header>
-
 <ion-content>
-  <ion-list inset>
-    <form [ngFormModel]="form" (ngSubmit)="save()">
-      <ion-item>
-        <ion-label floating>Name</ion-label>
-        <ion-input type="text" [(ngModel)]="group.name"></ion-input>
-      </ion-item>
-      <button block class="col50 col-offset-25">
-        <ion-icon name="add"></ion-icon>Save
-      </button>
-      <button block class="col50 col-offset-25">
-        <ion-icon name="back" (ngClick)="back()"></ion-icon>Back
-      </button>
-    </form>
-  </ion-list>
-  <ion-list inset>
-    <form [ngFormModel]="form" (ngSubmit)="addSelectedContact()">
-      <ion-item>
-        <ion-label floating>Name</ion-label>
-        <ion-select [(ngModel)]="selectedContactId">
-          <ion-option *ngFor="let contact of remainingContacts" [value]="contact.id">
-            {{ contact.firstName + ' ' + contact.lastName }}
-          </ion-option>
-        </ion-select>
-      </ion-item>
-      <button block class="col50 col-offset-25">
-        <ion-icon name="add" (click)="addSelectedContact(selectedContactId)" (disabled)="!selectedContactId"></ion-icon>Add
-      </button>
-    </form>
-  </ion-list>
-  <ion-list>
-    <table style="width: 50%; margin-left: 25%;">
-      <tr *ngFor="let contactGroup of contactGroups">
-        <td style="width: 90%;">{{ contactGroup.contact.firstName }}</td>
-        <td>
-          <button type="button" class="fa fa-trash btn btn-danger pull-right" (click)="removeContact(contactGroup.id)">
-            remove
-          </button>
-        </td>
-      </tr>
-    </table>
-  </ion-list>
+    <ion-grid>
+        <ion-row>
+            <ion-col>
+                <form [ngFormModel]="form">
+                    <ion-item>
+                        <ion-title>Name</ion-title>
+                        <ion-input type="text" [(ngModel)]="group.name"></ion-input>
+                    </ion-item>
+                    <ion-nav-bar class="bar-dark">
+                        <ion-nav-buttons side="secondary">
+                            <button (click)="save()" side="left">
+                                <ion-icon ios="ios-create" md="md-create"></ion-icon>Save
+                            </button>
+                            <button (click)="back()" side="right">
+                                <ion-icon ios="ios-arrow-back" md="md-arrow-back" name="back"></ion-icon>Back
+                            </button>
+                        </ion-nav-buttons>
+                    </ion-nav-bar>
+                </form>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-title width-50 center>Contacts</ion-title>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <form [ngFormModel]="form">
+                    <ion-item>
+                        <ion-label>Name</ion-label>
+                        <ion-select [(ngModel)]="selectedContactId">
+                            <ion-option *ngFor="let contact of remainingContacts" [value]="contact.id">
+                                {{ contact.firstName + ' ' + contact.lastName }}
+                            </ion-option>
+                        </ion-select>
+                    </ion-item>
+                    <button block name="add" (click)="addSelectedContact(selectedContactId)" (disabled)="!selectedContactId">
+                        <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon>Add
+                    </button>
+                </form>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <ion-grid>
+                    <ion-row *ngFor="let contactGroup of contactGroups">
+                        <ion-col>{{ contactGroup.contact.firstName }}</ion-col>
+                        <ion-col>
+                            <button name="trash" class="button button-small  button-light" (click)="removeContact(contactGroup.id)" end>
+                                <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
+                            </button>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 </ion-content>
