@@ -1,19 +1,25 @@
-
 <ion-header>
-  <ion-navbar>
-    <button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Groups</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>Groups</ion-title>
+    </ion-navbar>
 </ion-header>
-
-<ion-content>
-  <ion-list>
-    <button ion-item *ngFor="let group of groups" (click)="show(group.id)">
-      <ion-icon name="{{group.imageUrl || shadowImage}}" item-left></ion-icon>
-      {{ group.id + ' - ' + group.name }}
-    </button>
-  </ion-list>
+<ion-content padding>
+    <ion-grid>
+        <ion-row *ngFor="let group of groups">
+            <ion-col width-90>
+                <button ion-item (click)="show(group.id)">
+                    <ion-icon item-left></ion-icon>
+                    {{ group.id + ' - ' + group.name }}
+                </button>
+            </ion-col>
+            <ion-col right>
+                <button name="trash" class="button button-small button-light" (click)="remove(group.id)">
+                    <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
+                </button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 </ion-content>
-

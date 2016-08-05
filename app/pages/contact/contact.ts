@@ -53,8 +53,7 @@ export class ContactCmp {
 			contactGroupService
 				.query(contactGroupParams, false, true)
 				.subscribe((contactGroups) => {
-					self.contactGroups = contactGroups;
-					console.log(self.contactGroups,contactGroups)
+					self.contactGroups = contactGroups;					
 					self.getRemainingGroups();
 				});
 
@@ -122,16 +121,13 @@ export class ContactCmp {
                 self.remainingGroups.push(contactGroup.group);
             });
     }
-    createContact(event){
-        this.nav.push(ContactCmp, { animate: false });
-    }
     save() {
         if (this.contactForm.valid) {
             var self = this;
             delete this.contact.id;
             this.contactService.save(this.contact)
                 .subscribe((response) => {
-                    this.notificationService.show('Success', 'Contact Updated!');
+                    this.notificationService.show('Success', 'Contact created!');
                 })
         }
     }

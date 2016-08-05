@@ -6,15 +6,15 @@ import { ContactInfo } from '../../models/contact-info';
 import { BaseHttpService } from '../../services/base-http';
 import { ContactInfoService } from '../../services/contact-info';
 import { ContactService } from '../../services/contact';
-import { ContactInfoCmp } from '../contact-info/contact-info';
 import { NavController, NavParams } from 'ionic-angular';
+import { ContactInfoCmp } from '../contact-info/contact-info';
 
 
 @Component({
     selector: 'contact-info-list',
     templateUrl: './build/pages/contact-info/contact-info-list.html',
     //styleUrls: ['./build/pages/contact-info/contact-info.css'],
-    providers: [ContactInfoService, BaseHttpService,ContactService],
+    providers: [ContactInfoService, BaseHttpService,ContactService,ContactInfoService],
     directives: [NgClass]
 })
 
@@ -22,11 +22,12 @@ export class ContactInfoListCmp {
     public contactInfo: ContactInfo[] = [];
     public contactInfoFields: any[] = [
         { label: 'Type', key: 'infoType', mobileShow: true },
-        { label: 'Phone', key: 'phone' }       
+        { label: 'Phone', key: 'phone' },
+        { label: 'Email', key: 'email' }
     ];
     params: URLSearchParams = new URLSearchParams();
 
-    constructor(private nav: NavController, navParams: NavParams, private contactService: ContactService,private contactInfoService: ContactInfoService) {
+    constructor(private nav: NavController,private navParams: NavParams, private contactService: ContactService,private contactInfoService: ContactInfoService) {
         this.params.set('filter', 'contact_id=' + navParams.get('id'));
         this.getList();
     };
@@ -39,12 +40,12 @@ export class ContactInfoListCmp {
             });
     };
 
-    edit(id, contactId) {
+    edit(id, contactId) {        
         this.nav.push(ContactInfoCmp, { id: id, contactId: contactId, animate: false });
     };
 
     add() {
-        this.nav.push(ContactInfoCmp, { animate: false });
+        this.nav.push(ContactInfoCmp, {contactId: this.navParams.get('id'), animate: false });
     }
 
     remove(id) {

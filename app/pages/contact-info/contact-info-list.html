@@ -1,4 +1,4 @@
-<ion-grid>
+<ion-grid >
     <ion-row>
         <ion-col>Contact Info</ion-col>
         <ion-col>
@@ -7,9 +7,9 @@
             </button>
         </ion-col>
     </ion-row>
-    <ion-row class="grid-basic-page header">
+    <ion-row class="grid-basic-page">
         <ion-col *ngFor="let field of contactInfoFields" [ngClass]="{ 'hidden-xs hidden-sm': !field.mobileShow }" width-25>
-            <ion-label> {{ field.label }} </ion-label>
+            {{ field.label }}
         </ion-col>
         <ion-col class="grid-basic-page" width-20></ion-col>
     </ion-row>

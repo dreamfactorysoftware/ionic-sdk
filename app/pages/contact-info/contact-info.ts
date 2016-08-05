@@ -12,16 +12,15 @@ import { NotificationService } from '../../services/notification';
 import { ContactGroupService } from '../../services/contact-group';
 import { GroupService } from '../../services/group';
 import { ContactService } from '../../services/contact';
-import { ContactInfoListCmp } from '../contact-info/contact-info-list';
 
 import { NavController, NavParams } from 'ionic-angular';
 
 @Component({
     selector: 'contact-info',
     templateUrl: './build/pages/contact-info/contact-info.html',
-    styleUrls: ['./build/pages/contact-info/contact-info.css'],
-    providers: [ContactService, BaseHttpService, ContactGroupService, GroupService, NotificationService],
-    directives: [FORM_DIRECTIVES, ContactInfoListCmp]
+    //styleUrls: ['./build/pages/contact-info/contact-info.css'],
+    providers: [ContactService, BaseHttpService, ContactGroupService,ContactInfoService, GroupService, NotificationService],
+    directives: [FORM_DIRECTIVES]
 })
 
 export class ContactInfoCmp {
@@ -69,10 +68,6 @@ export class ContactInfoCmp {
             zip: this.zip
         });
     };
-    add(event) {
-        this.nav.push(ContactInfoCmp, { contactId: this.contactInfo.contactId, animate: false });
-    }   
-    
     save() {
         if (this.form.valid) {
             var self = this;
