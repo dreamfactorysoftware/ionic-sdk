@@ -46,6 +46,6 @@
       "locator": "ios"
     }
   ],
-  "name": "ContactBook",
-  "description": "Simple Contact Book"
+  "name": "ionic-sdk",
+  "description": "Address book app written in ionic using Dreamfactory APIs"
 }
