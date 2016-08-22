@@ -16,8 +16,7 @@ import { GroupService } from '../../services/group';
 import { ContactInfoListCmp } from '../contact-info/contact-info-list';
 import {URLSearchParams} from '@angular/http';
 
-@Component({
-    selector: 'contact',
+@Component({   
     templateUrl: './build/pages/contact/contact.html',
     providers: [ContactService, BaseHttpService, ContactInfoService, ContactGroupService, GroupService, NotificationService, FormBuilder],
     directives: [FORM_DIRECTIVES, ContactInfoListCmp]

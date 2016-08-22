@@ -61,6 +61,7 @@ export class GroupService {
 					return response;
 				});
 		} else {
+			delete group.id;
 			return this.httpService.http.post(this.baseResourceUrl, group.toJson(true))
 				.map((response) => {
 					return response;

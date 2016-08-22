@@ -2,13 +2,13 @@
     <ion-navbar>
         <button menuToggle>
             <ion-icon name="menu"></ion-icon>
-        </button>
-        <ion-title>Contact List</ion-title>
-        <ion-buttons end>
-            <button name="add" class="button button-small button-light" (click)="createContact()">
+        </button>        
+        <div class="button-bar" style="display:flex;padding-right:6%">
+            <ion-title>Contact List</ion-title>
+            <button name="add" class="button icon-left button-positive" (click)="createContact()">
                 <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon>
             </button>
-        </ion-buttons>
+        </div>
     </ion-navbar>
 </ion-header>
 <ion-content padding>
@@ -16,12 +16,12 @@
         <ion-row *ngFor="let contact of contacts">
             <ion-col width-90>
                 <button ion-item (click)="show($event, contact.id)">
-                    <ion-icon name="{{contact.imageUrl || shadowImage}}" item-left></ion-icon>
+                    <ion-icon name="{{contact.imageUrl || shadowImage}}" ></ion-icon>
                     {{ contact.firstName + ' ' + contact.lastName }}
                 </button>
             </ion-col>
             <ion-col right>
-                <button name="trash" class="button button-small button-light" (click)="remove(contact.id)">
+                <button name="trash" class="button icon-left button-positive" (click)="remove(contact.id)">
                     <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
                 </button>
             </ion-col>

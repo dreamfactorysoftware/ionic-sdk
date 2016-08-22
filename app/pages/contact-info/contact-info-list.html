@@ -1,27 +1,27 @@
 <ion-grid >
     <ion-row>
-        <ion-col>Contact Info</ion-col>
+        <ion-col center>Contact Info</ion-col>
         <ion-col>
-            <button name="add" class="button button-small  button-light" (click)="add()">
+            <button name="add" class="button icon-left button-positive" (click)="add()">
                 <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon>
             </button>
         </ion-col>
     </ion-row>
     <ion-row class="grid-basic-page">
-        <ion-col *ngFor="let field of contactInfoFields" [ngClass]="{ 'hidden-xs hidden-sm': !field.mobileShow }" width-25>
+        <ion-col *ngFor="let field of contactInfoFields" [ngClass]="{ 'hidden-xs hidden-sm': !field.mobileShow }" width-20>
             {{ field.label }}
         </ion-col>
         <ion-col class="grid-basic-page" width-20></ion-col>
     </ion-row>
     <ion-row *ngFor="let item of contactInfo" class="grid-basic-page">
-        <ion-col *ngFor="let field of contactInfoFields" [ngClass]="{ 'hidden-xs hidden-sm': !field.mobileShow }" width-25> {{ item[field.key] }}</ion-col>
-        <ion-col width-10>
-            <button name="trash" class="button button-small  button-light" (click)="remove(item.id)" end>
+        <ion-col *ngFor="let field of contactInfoFields" [ngClass]="{ 'hidden-xs hidden-sm': !field.mobileShow }" width-20> {{ item[field.key] }}</ion-col>
+        <ion-col width-15>
+            <button name="trash" class="button icon-left button-positive" (click)="remove(item.id)" end>
                 <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
             </button>
         </ion-col>
-        <ion-col width-10>
-            <button name="add" class="button button-small  button-light" (click)="edit(item.id,item.contactId)">
+        <ion-col width-15>
+            <button name="add" class="button icon-left button-positive" (click)="edit(item.id,item.contactId)">
                 <ion-icon ios="ios-create" md="md-create"></ion-icon>
             </button>
         </ion-col>

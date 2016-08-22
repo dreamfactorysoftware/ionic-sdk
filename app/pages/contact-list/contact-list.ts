@@ -8,8 +8,7 @@ import {NavController, NavParams} from 'ionic-angular';
 import {ContactInfoCmp} from '../contact-info/contact-info';
 import {ContactCmp} from '../contact/contact';
 
-@Component({
-  selector: 'contact-list',
+@Component({  
   templateUrl: 'build/pages/contact-list/contact-list.html',
   providers: [ContactService, BaseHttpService],
   directives: []

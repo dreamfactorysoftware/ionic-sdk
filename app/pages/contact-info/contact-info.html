@@ -44,17 +44,17 @@
                 <ion-label floating>Country</ion-label>
                 <ion-input ngControl="country" [(ngModel)]="contactInfo.country"></ion-input>
             </ion-item>            
-            <ion-item center>
-                <button class="button button-small button-light" *ngIf="!contactInfo.id" (click)="save(contactInfo.contactId)">
+             <div class="button-bar">
+                <button class="button icon-left button-positive" *ngIf="!contactInfo.id" (click)="save(contactInfo.contactId)">
                     <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon>Add
                 </button>
-                <button class="button button-small button-light" *ngIf="contactInfo.id" (click)="save()">
+                <button class="button icon-left button-positive" *ngIf="contactInfo.id" (click)="save()">
                     <ion-icon ios="ios-create" md="md-create"></ion-icon>Save
                 </button>
-                <button class="button button-small button-light" (click)="back()">
+                <button class="button icon-left button-positive" (click)="back()">
                     <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>Back
                 </button>
-            </ion-item>
+            </div>
         </form>
     </ion-list>
 </ion-content>

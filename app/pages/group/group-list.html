@@ -3,7 +3,12 @@
         <button menuToggle>
             <ion-icon name="menu"></ion-icon>
         </button>
-        <ion-title>Groups</ion-title>
+        <div class="button-bar" style="display:flex;padding-right:6%">
+            <ion-title>Groups</ion-title>
+            <button name="add" (click)="createGroup()" clear end>
+                <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon>
+            </button>
+        </div>
     </ion-navbar>
 </ion-header>
 <ion-content padding>
@@ -16,7 +21,7 @@
                 </button>
             </ion-col>
             <ion-col right>
-                <button name="trash" class="button button-small button-light" (click)="remove(group.id)">
+                <button name="trash" class="button icon-left button-positive" (click)="remove(group.id)">
                     <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
                 </button>
             </ion-col>

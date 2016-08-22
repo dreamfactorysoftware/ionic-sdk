@@ -16,7 +16,7 @@ import { ContactService } from '../../services/contact';
 import { NavController, NavParams } from 'ionic-angular';
 
 @Component({
-    selector: 'contact-info',
+    //selector: 'contact-info',
     templateUrl: './build/pages/contact-info/contact-info.html',
     //styleUrls: ['./build/pages/contact-info/contact-info.css'],
     providers: [ContactService, BaseHttpService, ContactGroupService,ContactInfoService, GroupService, NotificationService],

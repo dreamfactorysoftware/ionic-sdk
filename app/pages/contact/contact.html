@@ -35,19 +35,19 @@
                 <ion-label floating>Notes</ion-label>
                 <ion-input type="text" ngControl="notes" [(ngModel)]="contact.notes"></ion-input>
             </ion-item>
-            <ion-item center>
-                <button class="button button-small button-light" (click)="save()">
+            <div class="button-bar">
+                <button class="button icon-left button-positive" (click)="save()">
                     <ion-icon ios="ios-create" md="md-create"></ion-icon>Save</button>
-                <button class="button button-small button-light" (click)="back()">
+                <button class="button icon-left button-positive" (click)="back()">
                     <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>Back
                 </button>
-            </ion-item>
+            </div>
         </form>
     </ion-list>
     <!-- Table -->
     <ion-grid *ngIf="contact.id">
-        <ion-row center>
-            <ion-title>Groups</ion-title>
+        <ion-row>
+            <ion-col><ion-label style="text-align: center;font-weight: bold;font-size: 17px;">Groups</ion-label></ion-col>
         </ion-row>
         <ion-row>
             <ion-col>
@@ -58,7 +58,7 @@
                 </ion-item>
             </ion-col>
             <ion-col>
-                <button name="add" class="button button-small button-light" (click)="addSelectedGroup()" (disabled)="!selectedGroupId" end>
+                <button name="add" class="button icon-left button-positive" (click)="addSelectedGroup()" (disabled)="!selectedGroupId" end>
                     <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon>
                 </button>
             </ion-col>
@@ -66,7 +66,7 @@
         <ion-row *ngFor="let contactGroup of contactGroups">
             <ion-col>{{ contactGroup.group.name }}</ion-col>
             <ion-col>
-                <button name="trash" class="button button-small button-light" (click)="removeGroup(contactGroup)" end>
+                <button name="trash" class="button icon-left button-positive" (click)="removeGroup(contactGroup)" end>
                     <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
                 </button>
             </ion-col>
