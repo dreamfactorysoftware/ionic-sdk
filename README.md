@@ -58,7 +58,7 @@ To download and install DreamFactory, follow the instructions [here](http://wiki
 - npm install -g ionic@beta (reference: http://ionicframework.com/docs/v2/getting-started/installation/)
 - npm install -g cordova
 - configure your env: app/config/constants.ts
-- ionic server -l
+- ionic serve -l
 
 #Additional Resources
 
