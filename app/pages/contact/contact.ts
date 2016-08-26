@@ -15,6 +15,7 @@ import { ContactGroupService } from '../../services/contact-group';
 import { GroupService } from '../../services/group';
 import { ContactInfoListCmp } from '../contact-info/contact-info-list';
 import {URLSearchParams} from '@angular/http';
+import {ContactListCmp} from '../../pages/contact-list/contact-list';
 
 @Component({   
     templateUrl: './build/pages/contact/contact.html',
@@ -58,8 +59,8 @@ export class ContactCmp {
 
 		}
         this.contactForm = formBuilder.group({
-            'firstName': ['', Validators.compose([Validators.required, Validators.minLength(6)])],
-            'lastName': ['', Validators.compose([Validators.required, Validators.minLength(4)])],
+            'firstName': ['', Validators.compose([Validators.maxLength(15), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
+            'lastName': ['', Validators.compose([Validators.maxLength(15), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
             'imageUrl': this.imageUrl,
             'skype': this.skype,
             'twitter': this.twitter,
@@ -122,11 +123,10 @@ export class ContactCmp {
     }
     save() {
         if (this.contactForm.valid) {
-            var self = this;
-            delete this.contact.id;
+            var self = this;            
             this.contactService.save(this.contact)
-                .subscribe((response) => {
-                    this.notificationService.show('Success', 'Contact created!');
+                .subscribe((response) => {                    
+                    this.nav.push(ContactListCmp);
                 })
         }
     }

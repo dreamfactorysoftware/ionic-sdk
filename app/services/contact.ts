@@ -58,6 +58,7 @@ export class ContactService {
 				return data;
 			});
 		} else {
+			delete contact.id;
 			return this.httpService.http.post(constants.DSP_INSTANCE_URL + '/api/v2/db/_table/contact', contact.toJson(true))
 			.map((data) => {
 				return data;

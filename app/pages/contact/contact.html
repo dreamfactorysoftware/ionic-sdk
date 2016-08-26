@@ -36,7 +36,7 @@
                 <ion-input type="text" ngControl="notes" [(ngModel)]="contact.notes"></ion-input>
             </ion-item>
             <div class="button-bar">
-                <button class="button icon-left button-positive" (click)="save()">
+                <button class="button icon-left button-positive" [disabled]="!contactForm.valid" (click)="save()">
                     <ion-icon ios="ios-create" md="md-create"></ion-icon>Save</button>
                 <button class="button icon-left button-positive" (click)="back()">
                     <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>Back
@@ -47,7 +47,9 @@
     <!-- Table -->
     <ion-grid *ngIf="contact.id">
         <ion-row>
-            <ion-col><ion-label style="text-align: center;font-weight: bold;font-size: 17px;">Groups</ion-label></ion-col>
+            <ion-col>
+                <ion-label style="text-align: center;font-weight: bold;font-size: 17px;">Groups</ion-label>
+            </ion-col>
         </ion-row>
         <ion-row>
             <ion-col>

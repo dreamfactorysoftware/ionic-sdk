@@ -12,10 +12,10 @@
         <form [ngFormModel]="form">
             <ion-item>
                 <ion-label floating>Name</ion-label>
-                <ion-input type="text" [(ngModel)]="group.name"></ion-input>
+                <ion-input type="text" ngControl="name" [(ngModel)]="group.name"></ion-input>
             </ion-item>
-             <div class="button-bar">
-                <button class="button icon-left button-positive" (click)="save(group.id)">
+            <div class="button-bar">
+                <button class="button icon-left button-positive" [disabled]="!form.valid" (click)="save(group.id)">
                     <ion-icon ios="ios-create" md="md-create"></ion-icon>Save
                 </button>
                 <button class="button icon-left button-positive" (click)="back()">
@@ -34,11 +34,11 @@
                     </ion-option>
                 </ion-select>
             </ion-item>
-           <div class="button-bar">
+            <div class="button-bar">
                 <button class="button icon-left button-positive" (click)="addSelectedContact(selectedContactId)" (disabled)="!selectedContactId">
                     <ion-icon name="add" ios="ios-add-circle" md="md-add-circle"></ion-icon>Add
                 </button>
-           </div>
+            </div>
         </form>
     </ion-list>
     <ion-list>

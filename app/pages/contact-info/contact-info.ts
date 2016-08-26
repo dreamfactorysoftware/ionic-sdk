@@ -12,6 +12,9 @@ import { NotificationService } from '../../services/notification';
 import { ContactGroupService } from '../../services/contact-group';
 import { GroupService } from '../../services/group';
 import { ContactService } from '../../services/contact';
+import { ValidationService } from '../../services/validation';
+import {ContactCmp} from '../contact/contact';
+
 
 import { NavController, NavParams } from 'ionic-angular';
 
@@ -19,7 +22,7 @@ import { NavController, NavParams } from 'ionic-angular';
     //selector: 'contact-info',
     templateUrl: './build/pages/contact-info/contact-info.html',
     //styleUrls: ['./build/pages/contact-info/contact-info.css'],
-    providers: [ContactService, BaseHttpService, ContactGroupService,ContactInfoService, GroupService, NotificationService],
+    providers: [ContactService, BaseHttpService, ContactGroupService, ContactInfoService, GroupService, NotificationService],
     directives: [FORM_DIRECTIVES]
 })
 
@@ -28,14 +31,14 @@ export class ContactInfoCmp {
     form: ControlGroup;
 
     id = new Control('');
-    address = new Control('', Validators.required);
+    address = new Control('', Validators.compose([Validators.minLength(2),Validators.maxLength(50), Validators.required]));
     infoType = new Control('', Validators.required);
-    city = new Control('', Validators.required);
-    state = new Control('', Validators.required);
-    country = new Control('', Validators.required);
-    email = new Control('', Validators.required);
-    phone = new Control('', Validators.required);
-    zip = new Control('', Validators.required);
+    city = new Control('', Validators.compose([Validators.minLength(2),Validators.maxLength(50), Validators.required]));
+    state = new Control('', Validators.compose([Validators.minLength(2),Validators.maxLength(20), Validators.required]));
+    country = new Control('', Validators.compose([Validators.minLength(2),Validators.maxLength(20), Validators.required]));
+    email = new Control('', Validators.compose([Validators.maxLength(50), ValidationService.emailValidator, Validators.required]));
+    phone = new Control('', Validators.compose([Validators.maxLength(50),Validators.minLength(10), ValidationService.phoneNumberValidator, Validators.required]));
+    zip = new Control('', Validators.compose([Validators.maxLength(50),Validators.minLength(5), ValidationService.zipCodeValidator, Validators.required]));
 
     infoTypes = ['home', 'work', 'mobile'];
 
@@ -48,7 +51,7 @@ export class ContactInfoCmp {
 
         var id: string = navParams.get('id');
         this.contactInfo.contactId = navParams.get('contactId');
-        if (id) {            
+        if (id) {
             let self = this;
             contactInfoService
                 .get(id)
@@ -74,15 +77,13 @@ export class ContactInfoCmp {
             if (this.contactInfo.id) {
                 this.httpService.http.patch(constants.DSP_INSTANCE_URL + '/api/v2/db/_table/contact_info', this.contactInfo.toJson(true))
                     .subscribe((data) => {
-                        self.notificationService.show('Success', 'Contact Info Updated!');
-                        //self.back();
+                        this.nav.push(ContactCmp, {id: this.contactInfo.contactId, animate: false });
                     });
             } else {
                 delete this.contactInfo.id;
                 this.httpService.http.post(constants.DSP_INSTANCE_URL + '/api/v2/db/_table/contact_info/', this.contactInfo.toJson(true))
                     .subscribe((data) => {
-                        this.notificationService.show('Success', 'New Contact Info Created!');
-                        //self.back();
+                        this.nav.push(ContactCmp, {id: this.contactInfo.contactId, animate: false });                        
                     });
             }
         }

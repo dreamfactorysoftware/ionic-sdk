@@ -4,6 +4,7 @@ import { URLSearchParams } from '@angular/http';
 import { FORM_DIRECTIVES, FormBuilder, Validators, Control, ControlGroup } from '@angular/common';
 
 import { Group } from '../../models/group';
+import { GroupListCmp } from '../group/group-list';
 import { ContactGroup } from '../../models/contact-group';
 import { Contact } from '../../models/contact';
 import { GroupService } from '../../services/group';
@@ -28,7 +29,7 @@ export class GroupCmp {
     form: ControlGroup;
 
     id = new Control('');
-    name = new Control('', Validators.required);
+    name = new Control('', Validators.compose([Validators.maxLength(45), Validators.required]));
 
     selectedContactId: number = null;
 
@@ -36,7 +37,7 @@ export class GroupCmp {
     contactGroups: Array < ContactGroup > = [];
     remainingContacts: Array < Contact > = [];
 
-
+    public groups: Group[] = [];
     constructor(private notificationService: NotificationService, private groupService: GroupService, private contactService: ContactService, private contactGroupService: ContactGroupService, private formBuilder: FormBuilder, private nav: NavController, navParams: NavParams) {
 
         var groupId: string = navParams.get('id');
@@ -62,7 +63,15 @@ export class GroupCmp {
             name: this.name
         });
     }
-
+    getList() {
+        let self = this;
+        let params = new URLSearchParams();
+        params.set('order', 'name+ASC');
+        this.groupService.query(params)
+            .subscribe((groups: Group[]) => {
+                self.groups = groups
+            });
+    }
     back() {
         this.nav.pop();
     }
@@ -115,8 +124,8 @@ export class GroupCmp {
     save() {
         var self = this;
         this.groupService.save(this.group)
-            .subscribe((response) => {
-                this.notificationService.show('Success', ' Group Updated!');
+            .subscribe((response) => {                
+                this.nav.push(GroupListCmp);
             });
     }
 }

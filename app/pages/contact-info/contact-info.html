@@ -22,7 +22,7 @@
             </ion-item>
             <ion-item>
                 <ion-label floating>Email</ion-label>
-                <ion-input type="text" ngControl="email" [(ngModel)]="contactInfo.email"></ion-input>
+                <ion-input type="text" ngControl="email" [(ngModel)]="contactInfo.email"></ion-input>               
             </ion-item>
             <ion-item>
                 <ion-label floating>Address</ion-label>
@@ -30,25 +30,25 @@
             </ion-item>
             <ion-item>
                 <ion-label floating>City</ion-label>
-                <ion-input ngControl="city" [(ngModel)]="contactInfo.city"></ion-input>
+                <ion-input type="text" ngControl="city" [(ngModel)]="contactInfo.city"></ion-input>
             </ion-item>
             <ion-item>
                 <ion-label floating>State</ion-label>
-                <ion-input ngControl="state" [(ngModel)]="contactInfo.state"></ion-input>
+                <ion-input type="text" ngControl="state" [(ngModel)]="contactInfo.state"></ion-input>
             </ion-item>
             <ion-item>
                 <ion-label floating>ZIP</ion-label>
-                <ion-input ngControl="zip" [(ngModel)]="contactInfo.zip"></ion-input>
+                <ion-input type="text" ngControl="zip" [(ngModel)]="contactInfo.zip"></ion-input>
             </ion-item>
             <ion-item>
                 <ion-label floating>Country</ion-label>
-                <ion-input ngControl="country" [(ngModel)]="contactInfo.country"></ion-input>
-            </ion-item>            
-             <div class="button-bar">
-                <button class="button icon-left button-positive" *ngIf="!contactInfo.id" (click)="save(contactInfo.contactId)">
+                <ion-input type="text" ngControl="country" [(ngModel)]="contactInfo.country"></ion-input>
+            </ion-item>
+            <div class="button-bar">
+                <button class="button icon-left button-positive" *ngIf="!contactInfo.id" [disabled]="!form.valid" (click)="save(contactInfo.contactId)">
                     <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon>Add
                 </button>
-                <button class="button icon-left button-positive" *ngIf="contactInfo.id" (click)="save()">
+                <button class="button icon-left button-positive" *ngIf="contactInfo.id" [disabled]="!form.valid" (click)="save()">
                     <ion-icon ios="ios-create" md="md-create"></ion-icon>Save
                 </button>
                 <button class="button icon-left button-positive" (click)="back()">
