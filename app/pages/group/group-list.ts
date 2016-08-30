@@ -24,7 +24,7 @@ export class GroupListCmp {
     getList() {
         let self = this;
         let params = new URLSearchParams();
-        params.set('order', 'name+ASC');
+        params.set('order', 'name ASC');
         this.groupService.query(params)
             .subscribe((groups: Group[]) => {
                 self.groups = groups

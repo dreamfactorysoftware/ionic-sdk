@@ -26,7 +26,7 @@ export class ContactListCmp {
 	getList () {
 		let self = this;
 		let params: URLSearchParams = new URLSearchParams();
-		params.set('order', 'last_name+ASC');
+		params.set('order', 'last_name ASC');
 		self.contactService.query(params)
 			.subscribe((contacts: Contact[]) => {
 				self.contacts = contacts
