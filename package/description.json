@@ -1,0 +1,6 @@
+{
+  "name": "Address Book for Ionic",
+  "description": "An address book app for Ionic showing user registration, user login, and CRUD.",
+  "type": 0,
+  "is_active": true
+}
