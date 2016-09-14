@@ -17,9 +17,10 @@ export class NotificationService {
                 text: 'Ok',
                 handler: () => {                    
                     let navTransition = alert.dismiss();
-                    navTransition.then(() => {
-                        this.nav.pop();
-                    });
+                    //if(!flag){return false;}
+                    // navTransition.then(() => {
+                    //     this.nav.pop();
+                    // });
                     return false;
                 }
             }]

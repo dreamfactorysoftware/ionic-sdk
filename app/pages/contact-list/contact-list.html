@@ -2,11 +2,14 @@
     <ion-navbar>
         <button menuToggle>
             <ion-icon name="menu"></ion-icon>
-        </button>        
-        <div class="button-bar" style="display:flex;padding-right:6%">
-            <ion-title>Contact List</ion-title>
+        </button>
+        <div class="button-bar" style="display:flex;padding-right:6%;float: right;padding: 0;">
+            <ion-title>Contact List</ion-title>            
             <button name="add" class="button icon-left button-positive" (click)="createContact()">
                 <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon>
+            </button>
+            <button name="log-out" class="button icon-left button-positive" (click)="logout()">
+                <ion-icon ios="ios-log-out" md="md-log-out"></ion-icon>
             </button>
         </div>
     </ion-navbar>
@@ -16,7 +19,7 @@
         <ion-row *ngFor="let contact of contacts">
             <ion-col width-90>
                 <button ion-item (click)="show($event, contact.id)">
-                    <ion-icon name="{{contact.imageUrl || shadowImage}}" ></ion-icon>
+                    <ion-icon name="{{contact.imageUrl || shadowImage}}"></ion-icon>
                     {{ contact.firstName + ' ' + contact.lastName }}
                 </button>
             </ion-col>
