@@ -31,7 +31,7 @@ export class RegisterCmp {
     }
 
     private storeToken(data) {
-        //this.httpService.http._defaultOptions.headers.set('X-Dreamfactory-Session-Token', data && data.session_token);
+        // this.httpService.http._defaultOptions.headers.set('X-Dreamfactory-Session-Token', data && data.session_token);
         localStorage.setItem('session_token', data.session_token);
         this.nav.push(ContactListCmp);
     }
