@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 //import {RouteParams, Router} from '@angular/router';
+import {Http, Headers, URLSearchParams,RequestOptions} from '@angular/http';
 import { FORM_DIRECTIVES, FormBuilder, Validators, Control, ControlGroup } from '@angular/common';
 
 import { ContactGroup } from '../../models/contact-group';
@@ -74,8 +75,13 @@ export class ContactInfoCmp {
     save() {
         if (this.form.valid) {
             var self = this;
-            if (this.contactInfo.id) {
-                this.httpService.http.patch(constants.DSP_INSTANCE_URL + '/api/v2/db/_table/contact_info', this.contactInfo.toJson(true))
+            var queryHeaders = new Headers();
+            queryHeaders.append('Content-Type', 'application/json');
+            queryHeaders.append('X-Dreamfactory-Session-Token', localStorage.getItem('session_token'));
+            queryHeaders.append('X-Dreamfactory-API-Key', constants.DSP_API_KEY);
+            let options = new RequestOptions({ headers: queryHeaders });
+            if (this.contactInfo.id) {                
+                this.httpService.http.patch(constants.DSP_INSTANCE_URL + '/api/v2/db/_table/contact_info', this.contactInfo.toJson(true),options)
                     .subscribe((data) => {
                         this.nav.push(ContactCmp, {id: this.contactInfo.contactId, animate: false });
                     });
@@ -83,7 +89,7 @@ export class ContactInfoCmp {
                 delete this.contactInfo.id;
                 this.httpService.http.post(constants.DSP_INSTANCE_URL + '/api/v2/db/_table/contact_info/', this.contactInfo.toJson(true))
                     .subscribe((data) => {
-                        this.nav.push(ContactCmp, {id: this.contactInfo.contactId, animate: false });                        
+                        this.nav.push(ContactCmp, {id: this.contactInfo.contactId, animate: false },options);                        
                     });
             }
         }
