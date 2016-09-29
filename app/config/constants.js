@@ -1,3 +1,3 @@
 "use strict";
-exports.DSP_API_KEY = 'd4ffe12c1602e2f0aa7c2ac9338c634295fc7e8dcd9ea0291013cbf26271dfc1';
-exports.DSP_INSTANCE_URL = 'https://ft-ravindra.vz2.dreamfactory.com';
+exports.DSP_API_KEY = '819984e59b8d96961c827abc3fd05f1eba6b7913c286261396286225041d80c3';
+exports.DSP_INSTANCE_URL = 'http://ft-djoker011.cl.dreamfactory.com';
