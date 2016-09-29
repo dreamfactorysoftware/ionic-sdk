@@ -4,7 +4,7 @@ import { URLSearchParams } from '@angular/http';
 import { Contact } from '../../models/contact';
 import { ContactService } from '../../services/contact';
 import { BaseHttpService } from '../../services/base-http';
-import { NavController, NavParams, ViewController } from 'ionic-angular';
+import { NavController, NavParams,ViewController } from 'ionic-angular';
 import { ContactInfoCmp } from '../contact-info/contact-info';
 import { ContactCmp } from '../contact/contact';
 import { LoginCmp } from '../login/login';
@@ -18,18 +18,17 @@ import { LoginCmp } from '../login/login';
 
 
 export class ContactListCmp {
-    public contacts: Contact[] = [];
+    public contacts: Contact[] = [];   
     shadowImage: string = 'https://image.freepik.com/free-icon/male-user-shadow_318-34042.png';
+    menuIsHidden: boolean = false;
 
-    constructor(private contactService: ContactService, private nav: NavController, navParams: NavParams, private viewCtrl: ViewController) {
+    constructor(private contactService: ContactService, private nav: NavController, navParams: NavParams, private view: ViewController) {
         this.getList();
-    }
 
-    ionViewWillEnter() {
-        console.log('entered')
-        this.viewCtrl.showBackButton(false);
     }
-
+    ionViewWillEnter() {        
+        this.view.showBackButton(false);
+    }
     getList() {
         let self = this;
         let params: URLSearchParams = new URLSearchParams();
