@@ -1,5 +1,5 @@
 import {Injectable} from'@angular/core';
-import {Http, Headers, URLSearchParams} from '@angular/http';
+import {Http, Headers,RequestOptions, URLSearchParams} from '@angular/http';
 import {ContactGroup} from '../models/contact-group';
 import * as constants from '../config/constants';
 import {BaseHttpService} from './base-http';
@@ -61,9 +61,13 @@ export class ContactGroupService {
 		var data: Array<any> = [
 			{ contact_id: contactId, contact_group_id: groupId }
 		];
-
+		var queryHeaders = new Headers();
+    	queryHeaders.append('Content-Type', 'application/json');
+    	queryHeaders.append('X-Dreamfactory-Session-Token', localStorage.getItem('session_token'));
+    	queryHeaders.append('X-Dreamfactory-API-Key', constants.DSP_API_KEY);
+    	let options = new RequestOptions({ headers: queryHeaders });
 		return this.httpService.http
-			.post(this.baseResourceUrl, JSON.stringify(data))
+			.post(this.baseResourceUrl, JSON.stringify(data),options)
 			.map((response) => {
 				var result: ServerResponse = response.json();
 				return result.resource[0];

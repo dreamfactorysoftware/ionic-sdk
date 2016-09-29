@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Http, Headers, URLSearchParams} from '@angular/http';
+import {Http, Headers,RequestOptions, URLSearchParams} from '@angular/http';
 import {Group} from '../models/group';
 import {Contact} from '../models/contact';
 import * as constants from '../config/constants';
@@ -55,14 +55,19 @@ export class GroupService {
 	}
 
 	save (group: Group): Observable<any> {
+		var queryHeaders = new Headers();
+    	queryHeaders.append('Content-Type', 'application/json');
+    	queryHeaders.append('X-Dreamfactory-Session-Token', localStorage.getItem('session_token'));
+    	queryHeaders.append('X-Dreamfactory-API-Key', constants.DSP_API_KEY);
+    	let options = new RequestOptions({ headers: queryHeaders });
 		if (group.id) {
-			return this.httpService.http.patch(this.baseResourceUrl, group.toJson(true))
+			return this.httpService.http.patch(this.baseResourceUrl, group.toJson(true),options)
 				.map((response) => {
 					return response;
 				});
 		} else {
 			delete group.id;
-			return this.httpService.http.post(this.baseResourceUrl, group.toJson(true))
+			return this.httpService.http.post(this.baseResourceUrl, group.toJson(true),options)
 				.map((response) => {
 					return response;
 				});
