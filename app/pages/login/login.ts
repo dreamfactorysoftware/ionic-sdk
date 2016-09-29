@@ -1,6 +1,6 @@
 import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
 import { FORM_DIRECTIVES, FormBuilder, Validators, Control, ControlGroup } from '@angular/common';
-import { URLSearchParams } from '@angular/http';
+import { URLSearchParams,Headers,RequestOptions } from '@angular/http';
 import { NavController, NavParams } from 'ionic-angular';
 
 import { BaseHttpService } from '../../services/base-http';
@@ -40,7 +40,10 @@ export class LoginCmp {
 
     formSubmit() {
         if (this.form.valid) {
-            this.httpService.http.post(constants.DSP_INSTANCE_URL + '/api/v2/user/session', JSON.stringify(this.form.value))
+            var queryHeaders = new Headers();
+                queryHeaders.append('Content-Type', 'application/json');
+                let options = new RequestOptions({ headers: queryHeaders });
+            this.httpService.http.post(constants.DSP_INSTANCE_URL + '/api/v2/user/session', JSON.stringify(this.form.value),options)
                 .subscribe((data) => {
                     this.storeToken(data.json());
                 }, (error) => {
