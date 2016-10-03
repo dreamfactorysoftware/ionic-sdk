@@ -23,7 +23,13 @@ export class ContactListCmp {
     menuIsHidden: boolean = false;
 
     constructor(private contactService: ContactService, private nav: NavController, navParams: NavParams, private view: ViewController) {
-        this.getList();
+        
+        var token = localStorage.getItem('session_token');
+        if (token) {
+            this.getList();
+        }else{
+           this.logout(); 
+        }
 
     }
     ionViewWillEnter() {        
@@ -47,7 +53,7 @@ export class ContactListCmp {
     }
     logout() {
         localStorage.setItem('session_token', '');
-        this.nav.push(LoginCmp);
+        this.nav.setRoot(LoginCmp);
     }
     remove(contactId) {
         var self = this;
