@@ -22,7 +22,7 @@ export class LoginCmp {
 
     form: ControlGroup;
     email: Control = new Control('', Validators.compose([Validators.maxLength(50), ValidationService.emailValidator, Validators.required]));
-    password: Control = new Control('', Validators.compose([Validators.minLength(8), Validators.maxLength(50), Validators.required]));
+    password: Control = new Control('', Validators.compose([Validators.minLength(6), Validators.maxLength(50), Validators.required]));
 
     constructor(formBuilder: FormBuilder, private httpService: BaseHttpService, private nav: NavController, navParams: NavParams, private notificationService: NotificationService) {
         this.form = formBuilder.group({

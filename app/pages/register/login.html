@@ -13,7 +13,7 @@
                 <ion-input type="password" ngControl="password"></ion-input>
             </ion-item>
             <div class="button-bar">
-                <button class="button icon-left button-positive" (click)="formSubmit()">
+                <button class="button icon-left button-positive" [disabled]="!form.valid" (click)="formSubmit()">
                     <ion-icon ios="ios-log-in" md="md-log-in"></ion-icon>Sign in
                 </button>
                 <button class="button icon-left button-positive" (click)="register()">
