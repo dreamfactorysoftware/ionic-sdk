@@ -19,6 +19,7 @@ export class DfRequest {
             let req: Request = < Request > url;
             req.headers = req.headers || new Headers({ 'Content-Type': 'application/json' });
             req.headers.set('X-DreamFactory-API-Key', constants.DSP_API_KEY);
+            req.headers.set('X-Dreamfactory-Session-Token', localStorage.getItem('session_token'));
 
             request = this.http.request(req);
         }
