@@ -15,7 +15,7 @@ import { GroupService } from '../../services/group';
 import { ContactService } from '../../services/contact';
 import { ValidationService } from '../../services/validation';
 import {ContactCmp} from '../contact/contact';
-
+import { LoginCmp } from '../login/login';
 
 import { NavController, NavParams } from 'ionic-angular';
 
@@ -49,7 +49,10 @@ export class ContactInfoCmp {
     selectedGroupId: number = null;
 
     constructor(private nav: NavController, navParams: NavParams, private formBuilder: FormBuilder, private contactInfoService: ContactInfoService, private httpService: BaseHttpService, private notificationService: NotificationService, private contactService: ContactService, private groupService: GroupService, private contactGroupService: ContactGroupService) {
-
+        var token = localStorage.getItem('session_token');
+        if (token =='') {
+            this.logout(); 
+        }
         var id: string = navParams.get('id');
         this.contactInfo.contactId = navParams.get('contactId');
         if (id) {
@@ -72,6 +75,9 @@ export class ContactInfoCmp {
             zip: this.zip
         });
     };
+    logout() {
+        this.nav.setRoot(LoginCmp);
+    } 
     save() {
         if (this.form.valid) {
             var self = this;
@@ -87,7 +93,7 @@ export class ContactInfoCmp {
                     });
             } else {
                 delete this.contactInfo.id;
-                this.httpService.http.post(constants.DSP_INSTANCE_URL + '/api/v2/db/_table/contact_info/', this.contactInfo.toJson(true))
+                this.httpService.http.post(constants.DSP_INSTANCE_URL + '/api/v2/db/_table/contact_info/', this.contactInfo.toJson(true),options)
                     .subscribe((data) => {
                         this.nav.push(ContactCmp, {id: this.contactInfo.contactId, animate: false },options);                        
                     });
