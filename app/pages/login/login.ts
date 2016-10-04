@@ -35,7 +35,7 @@ export class LoginCmp {
         //this.httpService.http._defaultOptions.headers.set('X-Dreamfactory-Session-Token', data && data.session_token);
         localStorage.setItem('session_token', data.session_token);
         //this._router.navigate(['ContactList']);
-        this.nav.push(ContactListCmp);
+        this.nav.setRoot(ContactListCmp,{}, { animate: true, direction: 'forward' });
     }
 
     formSubmit() {
