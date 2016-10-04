@@ -5,8 +5,11 @@ import {Contact} from '../models/contact';
 import * as constants from '../config/constants';
 import {BaseHttpService} from './base-http';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
 import {Observable} from 'rxjs/Observable';
 import {ContactService} from './contact';
+import { LoginCmp } from '../pages/login/login';
+import { NavController } from 'ionic-angular';
 
 class ServerResponse {
 	constructor(public resource: any) {
@@ -17,14 +20,18 @@ class ServerResponse {
 export class GroupService {
 	baseResourceUrl: string = constants.DSP_INSTANCE_URL + '/api/v2/db/_table/contact_group';
 	contactGroupUrl: string = constants.DSP_INSTANCE_URL + '/api/v2/db/_table/contact_group_relationship';
-	constructor(private httpService: BaseHttpService, private contactService: ContactService) {
+	constructor(private httpService: BaseHttpService, private contactService: ContactService,private nav: NavController) {
 
 	};
 
 
 	query(params?: URLSearchParams): Observable<Group[]> {
+		var queryHeaders = new Headers();
+    	queryHeaders.append('Content-Type', 'application/json');
+    	queryHeaders.append('X-Dreamfactory-Session-Token', localStorage.getItem('session_token'));
+    	queryHeaders.append('X-Dreamfactory-API-Key', constants.DSP_API_KEY);  
 		return this.httpService.http
-			.get(this.baseResourceUrl, { search: params })
+			.get(this.baseResourceUrl, { search: params, headers: queryHeaders })
 			.map((response) => {
 				var result: ServerResponse = response.json();
 				let groups: Array<Group> = [];
@@ -32,17 +39,28 @@ export class GroupService {
 					groups.push(Group.fromJson(group));
 				});
 				return groups;
-			});
+			}).catch(this.handleError);
 	};
-
+    private handleError (error: any) {
+	   let errMsg = (error.message) ? error.message :
+	   error.status ? `${error.status} - ${error.statusText}` : 'Server error';
+	   console.log(errMsg); // log to console instead
+	   localStorage.setItem('session_token', '');       
+	  return Observable.throw(errMsg);
+	}
+	
 	get(id: string): Observable<Group> {
+		var queryHeaders = new Headers();
+		queryHeaders.append('Content-Type', 'application/json');
+    	queryHeaders.append('X-Dreamfactory-Session-Token', localStorage.getItem('session_token'));
+    	queryHeaders.append('X-Dreamfactory-API-Key', constants.DSP_API_KEY);
 		return this.httpService.http
-			.get(this.baseResourceUrl + '/' + id)
+			.get(this.baseResourceUrl + '/' + id, { headers: queryHeaders})
 			.map((response) => {
 				var result: ServerResponse = response.json();
 				let group: Group = Group.fromJson(result);
 				return group;
-			});
+			}).catch(this.handleError);
 	};
 
 	remove(id: string) {

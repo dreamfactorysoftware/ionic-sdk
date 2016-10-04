@@ -4,7 +4,10 @@ import {Contact} from '../models/contact';
 import * as constants from '../config/constants';
 import {BaseHttpService} from './base-http';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
 import {Observable} from 'rxjs/Observable';
+import { LoginCmp } from '../pages/login/login';
+import { NavController } from 'ionic-angular';
 
 class ServerObj {
 	constructor (public resource: any) {
@@ -14,7 +17,7 @@ class ServerObj {
 @Injectable()
 export class ContactService {
 	baseResourceUrl: string = constants.DSP_INSTANCE_URL + '/api/v2/db/_table/contact';
-	constructor(private httpService: BaseHttpService) {
+	constructor(private httpService: BaseHttpService,private nav: NavController) {
 
 	};
 
@@ -33,9 +36,16 @@ export class ContactService {
 					contacts.push(Contact.fromJson(contact));
 				});
 				return contacts;
-			});
+			}).catch(this.handleError);
 	};
-
+	private handleError (error: any) {
+	   let errMsg = (error.message) ? error.message :
+	   error.status ? `${error.status} - ${error.statusText}` : 'Server error';
+	   console.log(errMsg); // log to console instead
+	   localStorage.setItem('session_token', '');       
+	  return Observable.throw(errMsg);
+	}
+	
 	get (id: string, params?: URLSearchParams): Observable<Contact> {
 		var queryHeaders = new Headers();
     	queryHeaders.append('Content-Type', 'application/json');
@@ -47,7 +57,7 @@ export class ContactService {
 				var result: any = response.json();
 				let contact: Contact = Contact.fromJson(result);
 				return contact;
-			});
+			}).catch(this.handleError);
 	};
 
 	remove (id: string) {

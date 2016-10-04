@@ -22,8 +22,12 @@ export class ContactGroupService {
 
 	query (params: URLSearchParams, includeContacts = false, includeGroups = false): Observable<ContactGroup[]> {
 		var self = this;
+		var queryHeaders = new Headers();
+    	queryHeaders.append('Content-Type', 'application/json');
+    	queryHeaders.append('X-Dreamfactory-Session-Token', localStorage.getItem('session_token'));
+    	queryHeaders.append('X-Dreamfactory-API-Key', constants.DSP_API_KEY);
 		return this.httpService.http
-			.get(this.baseResourceUrl, { search: params })
+			.get(this.baseResourceUrl, { search: params , headers: queryHeaders})
 			.map((response) => {
 				var result: ServerResponse = response.json();
 				return result.resource.map((item) => {

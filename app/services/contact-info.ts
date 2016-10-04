@@ -20,9 +20,13 @@ export class ContactInfoService {
 
 
 	query(params: URLSearchParams): Observable<ContactInfo[]> {
+		var queryHeaders = new Headers();
+    	queryHeaders.append('Content-Type', 'application/json');
+    	queryHeaders.append('X-Dreamfactory-Session-Token', localStorage.getItem('session_token'));
+    	queryHeaders.append('X-Dreamfactory-API-Key', constants.DSP_API_KEY);
 
 		return this.httpService.http
-			.get(this.baseResourceUrl, { search: params })
+			.get(this.baseResourceUrl, { search: params , headers: queryHeaders})
 			.map((response) => {
 				var result: ServerResponse = response.json();
 				let contacts: Array<ContactInfo> = [];
@@ -34,8 +38,12 @@ export class ContactInfoService {
 	};
 
 	get (id: string): Observable<ContactInfo> {
+		var queryHeaders = new Headers();
+    	queryHeaders.append('Content-Type', 'application/json');
+    	queryHeaders.append('X-Dreamfactory-Session-Token', localStorage.getItem('session_token'));
+    	queryHeaders.append('X-Dreamfactory-API-Key', constants.DSP_API_KEY);
 		return this.httpService.http
-			.get(this.baseResourceUrl + '/' + id)
+			.get(this.baseResourceUrl + '/' + id,{ headers: queryHeaders})
 			.map((response) => {
 				var result: ServerResponse = response.json();
 				let contactInfo: ContactInfo = ContactInfo.fromJson(result);
