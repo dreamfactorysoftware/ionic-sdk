@@ -13,7 +13,8 @@ import { NotificationService } from '../../services/notification';
 import { ContactGroupService } from '../../services/contact-group';
 import { BaseHttpService } from '../../services/base-http';
 import { NavController, NavParams } from 'ionic-angular';
-
+import { LoginCmp } from '../login/login';
+import { ContactCmp } from '../contact/contact';
 import * as constants from '../../config/constants';
 
 
@@ -39,7 +40,10 @@ export class GroupCmp {
 
     public groups: Group[] = [];
     constructor(private notificationService: NotificationService, private groupService: GroupService, private contactService: ContactService, private contactGroupService: ContactGroupService, private formBuilder: FormBuilder, private nav: NavController, navParams: NavParams) {
-
+        var token = localStorage.getItem('session_token');
+        if (token =='') {
+            this.logout(); 
+        }
         var groupId: string = navParams.get('id');
 
         if (groupId) {
@@ -63,6 +67,9 @@ export class GroupCmp {
             name: this.name
         });
     }
+    logout() {
+        this.nav.setRoot(LoginCmp);
+    }
     getList() {
         let self = this;
         let params = new URLSearchParams();
@@ -75,7 +82,9 @@ export class GroupCmp {
     back() {
         this.nav.pop();
     }
-
+    show(event, contactId) {
+        this.nav.push(ContactCmp, { id: contactId, animate: false });
+    }
     getRemainingContacts() {
         var self = this;
         this.contactService

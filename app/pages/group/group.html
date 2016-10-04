@@ -44,7 +44,12 @@
     <ion-list>
         <table style="width: 50%; margin-left: 25%;">
             <tr *ngFor="let contactGroup of contactGroups">
-                <td style="width: 90%;">{{ contactGroup.contact.firstName }}</td>
+                <td style="width: 90%;">
+                    <button ion-item (click)="show($event, contactGroup.contact.id)">
+                    <ion-icon name="{{contactGroup.contact.imageUrl}}"></ion-icon>
+                    {{ contactGroup.contact.firstName }}
+                </button>
+                </td>
                 <td>
                     <button type="button" class="button icon-left button-positive" (click)="removeContact(contactGroup.id)">
                         <ion-icon ios="ios-trash" md="md-trash"></ion-icon>
