@@ -55,6 +55,7 @@ export class ContactListCmp {
         localStorage.setItem('session_token', '');
         this.nav.setRoot(LoginCmp);
     }
+    
     remove(contactId) {
         var self = this;
         this.contactService.remove(contactId)
