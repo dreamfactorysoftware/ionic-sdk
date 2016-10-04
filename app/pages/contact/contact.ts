@@ -16,6 +16,7 @@ import { GroupService } from '../../services/group';
 import { ContactInfoListCmp } from '../contact-info/contact-info-list';
 import {URLSearchParams} from '@angular/http';
 import {ContactListCmp} from '../../pages/contact-list/contact-list';
+import { LoginCmp } from '../login/login';
 
 @Component({   
     templateUrl: './build/pages/contact/contact.html',
@@ -39,6 +40,10 @@ export class ContactCmp {
     selectedGroupId: number = null;
 
     constructor(private groupService: GroupService, private contactGroupService: ContactGroupService, private contactService: ContactService, private nav: NavController, navParams: NavParams, private contactInfoService: ContactInfoService, private formBuilder: FormBuilder, private httpService: BaseHttpService, private notificationService: NotificationService) {
+        var token = localStorage.getItem('session_token');
+        if (token =='') {
+            this.logout(); 
+        }
         var contactId: string = navParams.get('id');
 
 		if (contactId) {
@@ -74,7 +79,10 @@ export class ContactCmp {
         this.notes = this.contactForm.controls['notes'];
 
 
-    };    
+    };
+    logout() {
+        this.nav.setRoot(LoginCmp);
+    }    
     getRemainingGroups() {
         var self = this;
         this.groupService
@@ -126,13 +134,13 @@ export class ContactCmp {
             var self = this;            
             this.contactService.save(this.contact)
                 .subscribe((response) => {                    
-                    this.nav.push(ContactListCmp);
+                    this.nav.setRoot(ContactListCmp);
                 })
         }
     }
 
-    back() {
-        this.nav.pop();
+    back() {       
+        this.nav.popToRoot();
     };
 
 }
