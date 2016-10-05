@@ -12,7 +12,7 @@ import {DfRequestOptions} from './config/interceptors';
 class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = ContactListCmp;
+  rootPage: any = GroupListCmp;
   pages: Array<{ title: string, component: any }>;
 
   constructor(
