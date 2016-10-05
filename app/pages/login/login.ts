@@ -9,6 +9,7 @@ import { NotificationService } from '../../services/notification';
 import { ContactListCmp } from '../contact-list/contact-list';
 import { RegisterCmp } from '../register/register';
 import { ValidationService } from '../../services/validation';
+import {GroupListCmp} from '../group/group-list';
 
 @Component({
     // selector: 'df-login',
@@ -35,7 +36,7 @@ export class LoginCmp {
         //this.httpService.http._defaultOptions.headers.set('X-Dreamfactory-Session-Token', data && data.session_token);
         localStorage.setItem('session_token', data.session_token);
         //this._router.navigate(['ContactList']);
-        this.nav.setRoot(ContactListCmp,{}, { animate: true, direction: 'forward' });
+        this.nav.setRoot(GroupListCmp,{}, { animate: true, direction: 'forward' });
     }
 
     formSubmit() {
@@ -56,3 +57,4 @@ export class LoginCmp {
         this.nav.push(RegisterCmp);
     }
 }
+ 
