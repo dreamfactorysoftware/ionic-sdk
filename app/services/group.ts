@@ -64,6 +64,7 @@ export class GroupService {
 	};
 
 	remove(id: string) {
+		
 		return this.httpService.http
 			.delete(this.baseResourceUrl + '/' + id)
 			.map((response) => {
