@@ -52,8 +52,11 @@ export class ContactInfoService {
 	};
 
 	remove (id: number): Observable<any> {
+		var queryHeaders = new Headers();
+    	queryHeaders.append('Content-Type', 'application/json');
+    	queryHeaders.append('X-Dreamfactory-Session-Token', localStorage.getItem('session_token'));
 		return this.httpService.http
-			.delete(this.baseResourceUrl + '/' + id)
+			.delete(this.baseResourceUrl + '/' + id,{ headers: queryHeaders})
 			.map((response) => {
 				var result: any = response.json();
 				return parseInt(result.id);

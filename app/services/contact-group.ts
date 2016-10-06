@@ -82,8 +82,12 @@ export class ContactGroupService {
 		var params = new URLSearchParams();
 		params.set('filter', 'id=' + id);
 
+		var queryHeaders = new Headers();
+    	queryHeaders.append('Content-Type', 'application/json');
+    	queryHeaders.append('X-Dreamfactory-Session-Token', localStorage.getItem('session_token'));    	
+    	
 		return this.httpService.http
-			.delete(this.baseResourceUrl, { search: params })
+			.delete(this.baseResourceUrl, { search: params,headers: queryHeaders })
 			.map((response) => {
 				var result: any = response.json();
 				return parseInt(result.id);
