@@ -55,6 +55,7 @@ export class ContactInfoService {
 		var queryHeaders = new Headers();
     	queryHeaders.append('Content-Type', 'application/json');
     	queryHeaders.append('X-Dreamfactory-Session-Token', localStorage.getItem('session_token'));
+    	queryHeaders.append('X-Dreamfactory-API-Key', constants.DSP_API_KEY);
 		return this.httpService.http
 			.delete(this.baseResourceUrl + '/' + id,{ headers: queryHeaders})
 			.map((response) => {
