@@ -21,7 +21,7 @@ export class GroupListCmp {
 
     constructor(private groupService: GroupService, private nav: NavController, navParams: NavParams) {
         var token = localStorage.getItem('session_token');
-        if (token =='') {
+        if (token =='' || token == null) {
             this.logout(); 
         }
         this.getList();
@@ -37,9 +37,14 @@ export class GroupListCmp {
             });
     }
     logout() {
+        localStorage.setItem('session_token', '');
         this.nav.setRoot(LoginCmp);
     }
     remove(groupId) {
+        var token = localStorage.getItem('session_token');
+        if (token =='' || token == null) {
+            this.logout(); 
+        }
         var self = this;
         this.groupService.remove(groupId)
             .subscribe(() => {

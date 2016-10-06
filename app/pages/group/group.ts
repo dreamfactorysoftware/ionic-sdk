@@ -42,7 +42,7 @@ export class GroupCmp {
     public groups: Group[] = [];
     constructor(private notificationService: NotificationService, private groupService: GroupService, private contactService: ContactService, private contactGroupService: ContactGroupService, private formBuilder: FormBuilder, private nav: NavController, navParams: NavParams) {
         var token = localStorage.getItem('session_token');
-        if (token =='') {
+        if (token =='' || token == null) {
             this.logout(); 
         }
         var groupId: string = navParams.get('id');
@@ -69,6 +69,7 @@ export class GroupCmp {
         });
     }
     logout() {
+        localStorage.setItem('session_token', '');
         this.nav.setRoot(LoginCmp);
     }
     getList() {
