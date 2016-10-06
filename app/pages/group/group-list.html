@@ -3,21 +3,24 @@
         <button menuToggle>
             <ion-icon name="menu"></ion-icon>
         </button>
-        <div class="button-bar" style="display:flex;padding-right:6%">
+        <div class="button-bar" style="display:flex;padding-right:6%;float: right;padding: 0;">
             <ion-title>Groups</ion-title>
             <button name="add" (click)="createGroup()" clear end>
                 <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon>
+            </button>
+            <button name="log-out" class="button icon-left button-positive" (click)="logout()">
+                <ion-icon ios="ios-log-out" md="md-log-out"></ion-icon>
             </button>
         </div>
     </ion-navbar>
 </ion-header>
 <ion-content padding>
     <ion-grid>
-        <ion-row *ngFor="let group of groups">
+        <ion-row *ngFor="let group of groups | orderBy : ['name']">
             <ion-col width-90>
                 <button ion-item (click)="show(group.id)">
                     <ion-icon item-left></ion-icon>
-                    {{ group.id + ' - ' + group.name }}
+                    {{ group.name }}
                 </button>
             </ion-col>
             <ion-col right>

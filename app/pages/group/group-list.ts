@@ -6,11 +6,13 @@ import { GroupService } from '../../services/group';
 import { ContactService } from '../../services/contact';
 import { NavController, NavParams } from 'ionic-angular';
 import { GroupCmp } from '../group/group';
+import { LoginCmp } from '../login/login';
+import { OrderByPipe  } from "../../models/OrderBy"
 
 @Component({
     templateUrl: 'build/pages/group/group-list.html',
     providers: [GroupService, ContactService, BaseHttpService],
-    directives: []
+    pipes: [OrderByPipe]
 })
 
 export class GroupListCmp {
@@ -18,6 +20,10 @@ export class GroupListCmp {
     shadowImage: string = 'https://image.freepik.com/free-icon/male-user-shadow_318-34042.png';
 
     constructor(private groupService: GroupService, private nav: NavController, navParams: NavParams) {
+        var token = localStorage.getItem('session_token');
+        if (token =='' || token == null) {
+            this.logout(); 
+        }
         this.getList();
     }
 
@@ -30,8 +36,15 @@ export class GroupListCmp {
                 self.groups = groups
             });
     }
-
+    logout() {
+        localStorage.setItem('session_token', '');
+        this.nav.setRoot(LoginCmp);
+    }
     remove(groupId) {
+        var token = localStorage.getItem('session_token');
+        if (token =='' || token == null) {
+            this.logout(); 
+        }
         var self = this;
         this.groupService.remove(groupId)
             .subscribe(() => {

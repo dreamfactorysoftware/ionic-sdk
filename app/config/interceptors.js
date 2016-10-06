@@ -10,7 +10,7 @@ var DfRequestOptions = (function (_super) {
     __extends(DfRequestOptions, _super);
     function DfRequestOptions() {
         _super.call(this);
-        this.headers.set('X-Dreamfactory-API-Key', constants.DSP_API_KEY);
+        this.headers.set('X-Dreamfactory-API-Key', constants.DREAMFACTORY_API_KEY);
         var token = localStorage.getItem('session_token');
         if (token) {
             this.headers.set('X-Dreamfactory-Session-Token', token);

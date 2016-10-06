@@ -1,5 +1,5 @@
 import {Injectable} from'@angular/core';
-import {Http, Headers, URLSearchParams} from '@angular/http';
+import {Http, Headers,RequestOptions, URLSearchParams} from '@angular/http';
 import {ContactGroup} from '../models/contact-group';
 import * as constants from '../config/constants';
 import {BaseHttpService} from './base-http';
@@ -15,15 +15,19 @@ class ServerResponse {
 
 @Injectable()
 export class ContactGroupService {
-	baseResourceUrl: string = constants.DSP_INSTANCE_URL + '/api/v2/db/_table/contact_group_relationship';
+	baseResourceUrl: string = constants.DREAMFACTORY_INSTANCE_URL + '/api/v2/db/_table/contact_group_relationship';
 	constructor(private httpService: BaseHttpService, private contactService: ContactService, private groupService: GroupService) {
 
 	};
 
 	query (params: URLSearchParams, includeContacts = false, includeGroups = false): Observable<ContactGroup[]> {
 		var self = this;
+		var queryHeaders = new Headers();
+    	queryHeaders.append('Content-Type', 'application/json');
+    	queryHeaders.append('X-Dreamfactory-Session-Token', localStorage.getItem('session_token'));
+    	queryHeaders.append('X-Dreamfactory-API-Key', constants.DREAMFACTORY_API_KEY);
 		return this.httpService.http
-			.get(this.baseResourceUrl, { search: params })
+			.get(this.baseResourceUrl, { search: params , headers: queryHeaders})
 			.map((response) => {
 				var result: ServerResponse = response.json();
 				return result.resource.map((item) => {
@@ -61,9 +65,13 @@ export class ContactGroupService {
 		var data: Array<any> = [
 			{ contact_id: contactId, contact_group_id: groupId }
 		];
-
+		var queryHeaders = new Headers();
+    	queryHeaders.append('Content-Type', 'application/json');
+    	queryHeaders.append('X-Dreamfactory-Session-Token', localStorage.getItem('session_token'));
+    	queryHeaders.append('X-Dreamfactory-API-Key', constants.DREAMFACTORY_API_KEY);
+    	let options = new RequestOptions({ headers: queryHeaders });
 		return this.httpService.http
-			.post(this.baseResourceUrl, JSON.stringify(data))
+			.post(this.baseResourceUrl, JSON.stringify(data),options)
 			.map((response) => {
 				var result: ServerResponse = response.json();
 				return result.resource[0];
@@ -74,8 +82,12 @@ export class ContactGroupService {
 		var params = new URLSearchParams();
 		params.set('filter', 'id=' + id);
 
+		var queryHeaders = new Headers();
+    	queryHeaders.append('Content-Type', 'application/json');
+    	queryHeaders.append('X-Dreamfactory-Session-Token', localStorage.getItem('session_token'));    	
+    	queryHeaders.append('X-Dreamfactory-API-Key', constants.DREAMFACTORY_API_KEY);
 		return this.httpService.http
-			.delete(this.baseResourceUrl, { search: params })
+			.delete(this.baseResourceUrl, { search: params,headers: queryHeaders })
 			.map((response) => {
 				var result: any = response.json();
 				return parseInt(result.id);

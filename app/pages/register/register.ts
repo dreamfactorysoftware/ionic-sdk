@@ -1,6 +1,6 @@
 import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
 import { FORM_DIRECTIVES, FormBuilder, Validators, Control, ControlGroup } from '@angular/common';
-import { URLSearchParams } from '@angular/http';
+import { URLSearchParams,Headers,RequestOptions } from '@angular/http';
 import { NavController, NavParams } from 'ionic-angular';
 
 import { BaseHttpService } from '../../services/base-http';
@@ -25,7 +25,7 @@ export class RegisterCmp {
             first_name: new Control('', Validators.compose([Validators.minLength(3), Validators.maxLength(50), Validators.required])),
             last_name: new Control(''),
             email: new Control('', Validators.compose([Validators.maxLength(50), ValidationService.emailValidator, Validators.required])),
-            password: new Control('', Validators.compose([Validators.minLength(8), Validators.maxLength(50), Validators.required]))
+            password: new Control('', Validators.compose([Validators.minLength(6), Validators.maxLength(50), Validators.required]))
 
         });
     }
@@ -38,8 +38,11 @@ export class RegisterCmp {
 
     register() {
         if (this.form.valid) {
+            var queryHeaders = new Headers();
+            queryHeaders.append('Content-Type', 'application/json');
+            let options = new RequestOptions({ headers: queryHeaders });
             this.httpService.http
-                .post(constants.DSP_INSTANCE_URL + '/api/v2/user/register?login=true', JSON.stringify(this.form.value))
+                .post(constants.DREAMFACTORY_INSTANCE_URL + '/api/v2/user/register?login=true', JSON.stringify(this.form.value),options)
                 .subscribe((response) => {
                     this.storeToken(response.json());
                 }, (error) => {

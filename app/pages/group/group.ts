@@ -13,16 +13,18 @@ import { NotificationService } from '../../services/notification';
 import { ContactGroupService } from '../../services/contact-group';
 import { BaseHttpService } from '../../services/base-http';
 import { NavController, NavParams } from 'ionic-angular';
-
+import { LoginCmp } from '../login/login';
+import { ContactCmp } from '../contact/contact';
 import * as constants from '../../config/constants';
-
+import { OrderByPipe  } from "../../models/OrderBy"
 
 
 @Component({
     templateUrl: 'build/pages/group/group.html',
     //styleUrls: ['./components/group/group.css'],
     providers: [GroupService, ContactGroupService, ContactService, BaseHttpService, NotificationService],
-    directives: [FORM_DIRECTIVES]
+    directives: [FORM_DIRECTIVES],
+    pipes: [OrderByPipe]
 })
 
 export class GroupCmp {
@@ -39,7 +41,10 @@ export class GroupCmp {
 
     public groups: Group[] = [];
     constructor(private notificationService: NotificationService, private groupService: GroupService, private contactService: ContactService, private contactGroupService: ContactGroupService, private formBuilder: FormBuilder, private nav: NavController, navParams: NavParams) {
-
+        var token = localStorage.getItem('session_token');
+        if (token =='' || token == null) {
+            this.logout(); 
+        }
         var groupId: string = navParams.get('id');
 
         if (groupId) {
@@ -63,6 +68,10 @@ export class GroupCmp {
             name: this.name
         });
     }
+    logout() {
+        localStorage.setItem('session_token', '');
+        this.nav.setRoot(LoginCmp);
+    }
     getList() {
         let self = this;
         let params = new URLSearchParams();
@@ -75,7 +84,9 @@ export class GroupCmp {
     back() {
         this.nav.pop();
     }
-
+    show(event, contactId) {
+        this.nav.push(ContactCmp, { id: contactId, animate: false });
+    }
     getRemainingContacts() {
         var self = this;
         this.contactService

@@ -8,6 +8,7 @@ import { ContactInfoService } from '../../services/contact-info';
 import { ContactService } from '../../services/contact';
 import { NavController, NavParams } from 'ionic-angular';
 import { ContactInfoCmp } from '../contact-info/contact-info';
+import { LoginCmp } from '../login/login';
 
 
 @Component({
@@ -28,10 +29,17 @@ export class ContactInfoListCmp {
     params: URLSearchParams = new URLSearchParams();
 
     constructor(private nav: NavController,private navParams: NavParams, private contactService: ContactService,private contactInfoService: ContactInfoService) {
+        var token = localStorage.getItem('session_token');
+       if (token =='' || token == null) {
+            this.logout(); 
+        }
         this.params.set('filter', 'contact_id=' + navParams.get('id'));
         this.getList();
     };
-
+    logout() {
+        localStorage.setItem('session_token', '');
+        this.nav.setRoot(LoginCmp);
+    }
     getList() {
         let self = this;
         this.contactInfoService.query(this.params)

@@ -33,22 +33,28 @@ To download and install DreamFactory, follow the instructions [here](http://wiki
     - Make sure Open Reg Email Service Id is blank, so that new users can register without email confirmation.
     - Save changes.
 
+- Make sure you have a SQL database service named 'db'. Most DreamFactory instances have a default 'db' service for SQLite. You can add one by going to the Services tab in the admin console and creating a new SQL service. Make sure you set the name to 'db'.
+
 - Import the package file for the app.
     - From the Apps tab in the admin console, click Import and click 'Address Book for Ionic' in the list of sample apps. The Address Book package contains the application description, schemas, and sample data.
     - Leave storage service and folder blank. It will use the default local file service named 'files'.
     - Click the Import button. If successful, your app will appear on the Apps tab. You may have to refresh the page to see your new app in the list.
 
 - Edit your app API key and instance URL
-    - Edit app/config/constants.ts and set DSP_API_KEY to the key for your new app. The API key is shown on the app details in the Apps tab of the admin console. Set DSP_INSTANCE_URL to the full URL for your DreamFactory instance.
-
-- Make sure you have a SQL database service named 'db'. Most DreamFactory instances have a default 'db' service for SQLite. You can add one by going to the Services tab in the admin console and creating a new SQL service. Make sure you set the name to 'db'.
+    - Edit app/config/constants.ts and set DREAMFACTORY_API_KEY to the key for your new app. The API key is shown on the app details in the Apps tab of the admin console. Set DREAMFACTORY_INSTANCE_URL to the full URL for your DreamFactory instance.
 
 #Running the Address Book app
-
+- git clone https://github.com/dreamfactorysoftware/ionic-sdk.git
+- cd ionic-sdk
+# paste your DREAMFACTORY_INSTANCE_URL and DREAMFACTORY_API_KEY in app/config/config.ts
+- npm install -g grunt-npm-install
+- npm install -g gulp-cli
 - npm install
 - npm install -g ionic@beta (reference: http://ionicframework.com/docs/v2/getting-started/installation/)
 - npm install -g cordova (optional)
 - ionic serve -l
+
+Note for OS X: Tested with node 4.6.0 and npm 3.10.7. npm 3.10.8 has a bug that shows up as 'uid must be an unsigned int'.
 
 #Additional Resources
 

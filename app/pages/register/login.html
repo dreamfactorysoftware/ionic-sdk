@@ -5,12 +5,12 @@
     <ion-list inset>
         <form [ngFormModel]="form">
             <ion-item>
-                <!-- <ion-label floating>Email</ion-label> -->
-                <ion-input type="text" placeholder="Email" ngControl="email"></ion-input>
+                <ion-label floating>Email</ion-label>
+                <ion-input type="text" ngControl="email"></ion-input>
             </ion-item>
             <ion-item>
-                <!-- <ion-label floating>Password</ion-label> -->
-                <ion-input type="password" placeholder="Password" ngControl="password"></ion-input>
+                <ion-label floating>Password</ion-label>
+                <ion-input type="password" ngControl="password"></ion-input>
             </ion-item>
             <div class="button-bar">
                 <button class="button icon-left button-positive" [disabled]="!form.valid" (click)="formSubmit()">
