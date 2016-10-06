@@ -23,7 +23,7 @@ var DfRequest = (function () {
         else {
             var req = url;
             req.headers = req.headers || new http_1.Headers();
-            req.headers.set('X-DreamFactory-API-Key', constants.DSP_API_KEY);
+            req.headers.set('X-DreamFactory-API-Key', constants.DREAMFACTORY_API_KEY);
             request = this.http.request(req);
         }
         return request;
