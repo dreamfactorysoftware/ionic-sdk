@@ -8,12 +8,13 @@ import { NavController, NavParams,ViewController } from 'ionic-angular';
 import { ContactInfoCmp } from '../contact-info/contact-info';
 import { ContactCmp } from '../contact/contact';
 import { LoginCmp } from '../login/login';
+import { OrderByPipe  } from "../../models/OrderBy"
 
 
 @Component({
     templateUrl: 'build/pages/contact-list/contact-list.html',
     providers: [ContactService, BaseHttpService],
-    directives: []
+    pipes: [OrderByPipe]
 })
 
 

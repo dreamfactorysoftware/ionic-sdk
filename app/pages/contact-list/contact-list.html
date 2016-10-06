@@ -16,7 +16,7 @@
 </ion-header>
 <ion-content padding>
     <ion-grid>
-        <ion-row *ngFor="let contact of contacts">
+        <ion-row *ngFor="let contact of contacts | orderBy : ['lastName']">
             <ion-col width-90>
                 <button ion-item (click)="show($event, contact.id)">
                     <ion-icon name="{{contact.imageUrl || shadowImage}}"></ion-icon>
