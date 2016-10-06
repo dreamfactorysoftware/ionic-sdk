@@ -13,7 +13,7 @@
 </ion-header>
 <ion-content padding>
     <ion-grid>
-        <ion-row *ngFor="let group of groups">
+        <ion-row *ngFor="let group of groups | orderBy : ['name']">
             <ion-col width-90>
                 <button ion-item (click)="show(group.id)">
                     <ion-icon item-left></ion-icon>

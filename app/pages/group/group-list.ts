@@ -7,11 +7,12 @@ import { ContactService } from '../../services/contact';
 import { NavController, NavParams } from 'ionic-angular';
 import { GroupCmp } from '../group/group';
 import { LoginCmp } from '../login/login';
+import { OrderByPipe  } from "../../models/OrderBy"
 
 @Component({
     templateUrl: 'build/pages/group/group-list.html',
     providers: [GroupService, ContactService, BaseHttpService],
-    directives: []
+    pipes: [OrderByPipe]
 })
 
 export class GroupListCmp {
