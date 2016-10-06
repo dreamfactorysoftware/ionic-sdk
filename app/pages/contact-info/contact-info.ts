@@ -50,7 +50,7 @@ export class ContactInfoCmp {
 
     constructor(private nav: NavController, navParams: NavParams, private formBuilder: FormBuilder, private contactInfoService: ContactInfoService, private httpService: BaseHttpService, private notificationService: NotificationService, private contactService: ContactService, private groupService: GroupService, private contactGroupService: ContactGroupService) {
         var token = localStorage.getItem('session_token');
-        if (token =='') {
+        if (token =='' || token == null) {
             this.logout(); 
         }
         var id: string = navParams.get('id');
@@ -76,6 +76,7 @@ export class ContactInfoCmp {
         });
     };
     logout() {
+        localStorage.setItem('session_token', '');
         this.nav.setRoot(LoginCmp);
     } 
     save() {

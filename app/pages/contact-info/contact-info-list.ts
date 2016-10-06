@@ -30,13 +30,14 @@ export class ContactInfoListCmp {
 
     constructor(private nav: NavController,private navParams: NavParams, private contactService: ContactService,private contactInfoService: ContactInfoService) {
         var token = localStorage.getItem('session_token');
-        if (token =='') {
+       if (token =='' || token == null) {
             this.logout(); 
         }
         this.params.set('filter', 'contact_id=' + navParams.get('id'));
         this.getList();
     };
     logout() {
+        localStorage.setItem('session_token', '');
         this.nav.setRoot(LoginCmp);
     }
     getList() {
