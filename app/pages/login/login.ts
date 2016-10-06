@@ -44,7 +44,7 @@ export class LoginCmp {
             var queryHeaders = new Headers();
                 queryHeaders.append('Content-Type', 'application/json');
                 let options = new RequestOptions({ headers: queryHeaders });
-            this.httpService.http.post(constants.DSP_INSTANCE_URL + '/api/v2/user/session', JSON.stringify(this.form.value),options)
+            this.httpService.http.post(constants.DREAMFACTORY_INSTANCE_URL + '/api/v2/user/session', JSON.stringify(this.form.value),options)
                 .subscribe((data) => {
                     this.storeToken(data.json());
                 }, (error) => {
