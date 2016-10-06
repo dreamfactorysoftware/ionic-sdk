@@ -13,7 +13,7 @@ class ServerResponse {
 
 @Injectable()
 export class ContactInfoService {
-	baseResourceUrl: string = constants.DSP_INSTANCE_URL + '/api/v2/db/_table/contact_info';
+	baseResourceUrl: string = constants.DREAMFACTORY_INSTANCE_URL + '/api/v2/db/_table/contact_info';
 	constructor(private httpService: BaseHttpService) {
 
 	};
@@ -23,7 +23,7 @@ export class ContactInfoService {
 		var queryHeaders = new Headers();
     	queryHeaders.append('Content-Type', 'application/json');
     	queryHeaders.append('X-Dreamfactory-Session-Token', localStorage.getItem('session_token'));
-    	queryHeaders.append('X-Dreamfactory-API-Key', constants.DSP_API_KEY);
+    	queryHeaders.append('X-Dreamfactory-API-Key', constants.DREAMFACTORY_API_KEY);
 
 		return this.httpService.http
 			.get(this.baseResourceUrl, { search: params , headers: queryHeaders})
@@ -41,7 +41,7 @@ export class ContactInfoService {
 		var queryHeaders = new Headers();
     	queryHeaders.append('Content-Type', 'application/json');
     	queryHeaders.append('X-Dreamfactory-Session-Token', localStorage.getItem('session_token'));
-    	queryHeaders.append('X-Dreamfactory-API-Key', constants.DSP_API_KEY);
+    	queryHeaders.append('X-Dreamfactory-API-Key', constants.DREAMFACTORY_API_KEY);
 		return this.httpService.http
 			.get(this.baseResourceUrl + '/' + id,{ headers: queryHeaders})
 			.map((response) => {
@@ -55,7 +55,7 @@ export class ContactInfoService {
 		var queryHeaders = new Headers();
     	queryHeaders.append('Content-Type', 'application/json');
     	queryHeaders.append('X-Dreamfactory-Session-Token', localStorage.getItem('session_token'));
-    	queryHeaders.append('X-Dreamfactory-API-Key', constants.DSP_API_KEY);
+    	queryHeaders.append('X-Dreamfactory-API-Key', constants.DREAMFACTORY_API_KEY);
 		return this.httpService.http
 			.delete(this.baseResourceUrl + '/' + id,{ headers: queryHeaders})
 			.map((response) => {

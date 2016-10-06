@@ -15,7 +15,7 @@ class ServerResponse {
 
 @Injectable()
 export class ContactGroupService {
-	baseResourceUrl: string = constants.DSP_INSTANCE_URL + '/api/v2/db/_table/contact_group_relationship';
+	baseResourceUrl: string = constants.DREAMFACTORY_INSTANCE_URL + '/api/v2/db/_table/contact_group_relationship';
 	constructor(private httpService: BaseHttpService, private contactService: ContactService, private groupService: GroupService) {
 
 	};
@@ -25,7 +25,7 @@ export class ContactGroupService {
 		var queryHeaders = new Headers();
     	queryHeaders.append('Content-Type', 'application/json');
     	queryHeaders.append('X-Dreamfactory-Session-Token', localStorage.getItem('session_token'));
-    	queryHeaders.append('X-Dreamfactory-API-Key', constants.DSP_API_KEY);
+    	queryHeaders.append('X-Dreamfactory-API-Key', constants.DREAMFACTORY_API_KEY);
 		return this.httpService.http
 			.get(this.baseResourceUrl, { search: params , headers: queryHeaders})
 			.map((response) => {
@@ -68,7 +68,7 @@ export class ContactGroupService {
 		var queryHeaders = new Headers();
     	queryHeaders.append('Content-Type', 'application/json');
     	queryHeaders.append('X-Dreamfactory-Session-Token', localStorage.getItem('session_token'));
-    	queryHeaders.append('X-Dreamfactory-API-Key', constants.DSP_API_KEY);
+    	queryHeaders.append('X-Dreamfactory-API-Key', constants.DREAMFACTORY_API_KEY);
     	let options = new RequestOptions({ headers: queryHeaders });
 		return this.httpService.http
 			.post(this.baseResourceUrl, JSON.stringify(data),options)
@@ -85,7 +85,7 @@ export class ContactGroupService {
 		var queryHeaders = new Headers();
     	queryHeaders.append('Content-Type', 'application/json');
     	queryHeaders.append('X-Dreamfactory-Session-Token', localStorage.getItem('session_token'));    	
-    	queryHeaders.append('X-Dreamfactory-API-Key', constants.DSP_API_KEY);
+    	queryHeaders.append('X-Dreamfactory-API-Key', constants.DREAMFACTORY_API_KEY);
 		return this.httpService.http
 			.delete(this.baseResourceUrl, { search: params,headers: queryHeaders })
 			.map((response) => {
