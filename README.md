@@ -39,12 +39,16 @@ To download and install DreamFactory, follow the instructions [here](http://wiki
     - Click the Import button. If successful, your app will appear on the Apps tab. You may have to refresh the page to see your new app in the list.
 
 - Edit your app API key and instance URL
-    - Edit app/config/constants.ts and set DSP_API_KEY to the key for your new app. The API key is shown on the app details in the Apps tab of the admin console. Set DSP_INSTANCE_URL to the full URL for your DreamFactory instance.
+    - Edit app/config/constants.ts and set DREAMFACTORY_API_KEY to the key for your new app. The API key is shown on the app details in the Apps tab of the admin console. Set DREAMFACTORY_INSTANCE_URL to the full URL for your DreamFactory instance.
 
 - Make sure you have a SQL database service named 'db'. Most DreamFactory instances have a default 'db' service for SQLite. You can add one by going to the Services tab in the admin console and creating a new SQL service. Make sure you set the name to 'db'.
 
 #Running the Address Book app
-
+- git clone --depth 1 https://github.com/dreamfactorysoftware/ionic-sdk.git
+- cd ionic-sdk
+# paste your DREAMFACTORY_INSTANCE_URL and DREAMFACTORY_API_KEY in app/config/config.ts
+- npm install -g grunt-npm-install
+- npm install -g gulp-cli
 - npm install
 - npm install -g ionic@beta (reference: http://ionicframework.com/docs/v2/getting-started/installation/)
 - npm install -g cordova (optional)
