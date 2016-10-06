@@ -42,7 +42,7 @@ export class RegisterCmp {
             queryHeaders.append('Content-Type', 'application/json');
             let options = new RequestOptions({ headers: queryHeaders });
             this.httpService.http
-                .post(constants.DSP_INSTANCE_URL + '/api/v2/user/register?login=true', JSON.stringify(this.form.value),options)
+                .post(constants.DREAMFACTORY_INSTANCE_URL + '/api/v2/user/register?login=true', JSON.stringify(this.form.value),options)
                 .subscribe((response) => {
                     this.storeToken(response.json());
                 }, (error) => {
