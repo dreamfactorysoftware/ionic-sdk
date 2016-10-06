@@ -16,14 +16,15 @@ import { NavController, NavParams } from 'ionic-angular';
 import { LoginCmp } from '../login/login';
 import { ContactCmp } from '../contact/contact';
 import * as constants from '../../config/constants';
-
+import { OrderByPipe  } from "../../models/OrderBy"
 
 
 @Component({
     templateUrl: 'build/pages/group/group.html',
     //styleUrls: ['./components/group/group.css'],
     providers: [GroupService, ContactGroupService, ContactService, BaseHttpService, NotificationService],
-    directives: [FORM_DIRECTIVES]
+    directives: [FORM_DIRECTIVES],
+    pipes: [OrderByPipe]
 })
 
 export class GroupCmp {

@@ -43,7 +43,7 @@
     </ion-list>
     <ion-list>
         <table style="width: 50%; margin-left: 25%;">
-            <tr *ngFor="let contactGroup of contactGroups">
+            <tr *ngFor="let contactGroup of contactGroups | orderBy : ['contact.lastName']">
                 <td style="width: 90%;">
                     <button ion-item (click)="show($event, contactGroup.contact.id)">
                     <ion-icon name="{{contactGroup.contact.imageUrl}}"></ion-icon>
