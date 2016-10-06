@@ -26,12 +26,10 @@ export class ContactListCmp {
     constructor(private contactService: ContactService, private nav: NavController, navParams: NavParams, private view: ViewController) {
         
         var token = localStorage.getItem('session_token');
-        if (token) {
-            this.getList();
-        }else{
-           this.logout(); 
+        if (token =='' || token == null) {
+            this.logout();
         }
-
+        this.getList();
     }
     ionViewWillEnter() {        
         this.view.showBackButton(false);
