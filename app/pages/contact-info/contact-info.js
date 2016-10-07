@@ -68,7 +68,7 @@ var ContactInfoCmp = (function () {
         if (this.form.valid) {
             var self = this;
             if (this.contactInfo.id) {
-                this.httpService.http.patch(constants.DSP_INSTANCE_URL + '/api/v2/db/_table/contact_info', this.contactInfo.toJson(true))
+                this.httpService.http.patch(constants.DREAMFACTORY_INSTANCE_URL + '/api/v2/db/_table/contact_info', this.contactInfo.toJson(true))
                     .subscribe(function (data) {
                     self.notificationService.show('Success', 'Contact Info Updated!');
                     //self.back();
@@ -76,7 +76,7 @@ var ContactInfoCmp = (function () {
             }
             else {
                 delete this.contactInfo.id;
-                this.httpService.http.post(constants.DSP_INSTANCE_URL + '/api/v2/db/_table/contact_info/', this.contactInfo.toJson(true))
+                this.httpService.http.post(constants.DREAMFACTORY_INSTANCE_URL + '/api/v2/db/_table/contact_info/', this.contactInfo.toJson(true))
                     .subscribe(function (data) {
                     _this.notificationService.show('Success', 'New Contact Info Created!');
                     //self.back();
