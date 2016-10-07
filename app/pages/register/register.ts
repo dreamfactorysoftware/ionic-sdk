@@ -6,8 +6,8 @@ import { NavController, NavParams } from 'ionic-angular';
 import { BaseHttpService } from '../../services/base-http';
 import * as constants from '../../config/constants';
 import { NotificationService } from '../../services/notification';
-import { ContactListCmp } from '../contact-list/contact-list';
 import { ValidationService } from '../../services/validation';
+import {GroupListCmp} from '../group/group-list';
 
 @Component({
     //selector: 'df-register',
@@ -33,7 +33,7 @@ export class RegisterCmp {
     private storeToken(data) {
         // this.httpService.http._defaultOptions.headers.set('X-Dreamfactory-Session-Token', data && data.session_token);
         localStorage.setItem('session_token', data.session_token);
-        this.nav.push(ContactListCmp);
+        this.nav.push(GroupListCmp);
     }
 
     register() {
@@ -46,7 +46,7 @@ export class RegisterCmp {
                 .subscribe((response) => {
                     this.storeToken(response.json());
                 }, (error) => {
-                    this.notificationService.show('error', 'Cannot register new user, try again!');
+                    this.notificationService.show('error', JSON.parse(error._body).error.message);
                 });
         }
     }
