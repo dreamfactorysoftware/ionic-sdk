@@ -25,8 +25,8 @@ var GroupService = (function () {
     function GroupService(httpService, contactService) {
         this.httpService = httpService;
         this.contactService = contactService;
-        this.baseResourceUrl = constants.DSP_INSTANCE_URL + '/api/v2/db/_table/contact_group';
-        this.contactGroupUrl = constants.DSP_INSTANCE_URL + '/api/v2/db/_table/contact_group_relationship';
+        this.baseResourceUrl = constants.DREAMFACTORY_INSTANCE_URL + '/api/v2/db/_table/contact_group';
+        this.contactGroupUrl = constants.DREAMFACTORY_INSTANCE_URL + '/api/v2/db/_table/contact_group_relationship';
     }
     ;
     GroupService.prototype.query = function (params) {

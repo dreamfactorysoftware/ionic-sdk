@@ -23,7 +23,7 @@ var ServerObj = (function () {
 var ContactService = (function () {
     function ContactService(httpService) {
         this.httpService = httpService;
-        this.baseResourceUrl = constants.DSP_INSTANCE_URL + '/api/v2/db/_table/contact';
+        this.baseResourceUrl = constants.DREAMFACTORY_INSTANCE_URL + '/api/v2/db/_table/contact';
     }
     ;
     ContactService.prototype.query = function (params) {
@@ -59,13 +59,13 @@ var ContactService = (function () {
     };
     ContactService.prototype.save = function (contact) {
         if (contact.id) {
-            return this.httpService.http.patch(constants.DSP_INSTANCE_URL + '/api/v2/db/_table/contact', contact.toJson(true))
+            return this.httpService.http.patch(constants.DREAMFACTORY_INSTANCE_URL + '/api/v2/db/_table/contact', contact.toJson(true))
                 .map(function (data) {
                 return data;
             });
         }
         else {
-            return this.httpService.http.post(constants.DSP_INSTANCE_URL + '/api/v2/db/_table/contact', contact.toJson(true))
+            return this.httpService.http.post(constants.DREAMFACTORY_INSTANCE_URL + '/api/v2/db/_table/contact', contact.toJson(true))
                 .map(function (data) {
                 return data;
             });
