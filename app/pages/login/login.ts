@@ -6,7 +6,6 @@ import { NavController, NavParams } from 'ionic-angular';
 import { BaseHttpService } from '../../services/base-http';
 import * as constants from '../../config/constants';
 import { NotificationService } from '../../services/notification';
-import { ContactListCmp } from '../contact-list/contact-list';
 import { RegisterCmp } from '../register/register';
 import { ValidationService } from '../../services/validation';
 import {GroupListCmp} from '../group/group-list';
@@ -48,7 +47,7 @@ export class LoginCmp {
                 .subscribe((data) => {
                     this.storeToken(data.json());
                 }, (error) => {
-                    this.notificationService.show('error', 'Cannot login, try again!');
+                    this.notificationService.show('error', JSON.parse(error._body).error.message);
                 });
         }
     }

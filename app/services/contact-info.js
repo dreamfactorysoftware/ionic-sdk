@@ -23,7 +23,7 @@ var ServerResponse = (function () {
 var ContactInfoService = (function () {
     function ContactInfoService(httpService) {
         this.httpService = httpService;
-        this.baseResourceUrl = constants.DSP_INSTANCE_URL + '/api/v2/db/_table/contact_info';
+        this.baseResourceUrl = constants.DREAMFACTORY_INSTANCE_URL + '/api/v2/db/_table/contact_info';
     }
     ;
     ContactInfoService.prototype.query = function (params) {

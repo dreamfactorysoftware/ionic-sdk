@@ -28,7 +28,7 @@ var ContactGroupService = (function () {
         this.httpService = httpService;
         this.contactService = contactService;
         this.groupService = groupService;
-        this.baseResourceUrl = constants.DSP_INSTANCE_URL + '/api/v2/db/_table/contact_group_relationship';
+        this.baseResourceUrl = constants.DREAMFACTORY_INSTANCE_URL + '/api/v2/db/_table/contact_group_relationship';
     }
     ;
     ContactGroupService.prototype.query = function (params, includeContacts, includeGroups) {
